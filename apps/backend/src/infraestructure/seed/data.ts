@@ -1,0 +1,61 @@
+export const languages = [
+  { name: "javascript" },
+  { name: "typescript" },
+  { name: "python" },
+];
+
+export const javaScriptCodes: string[] = [
+  `import React from 'react';\nimport { Code } from '@mantine/core';\n\nfunction Demo() {\n    return <Code>React.createElement()</Code>;\n}`,
+  `export const hotjarInit = () => {\n    if (window.location.protocol === HOTJAR_PROTOCOLS.HTTPS) {\n        return Hotjar.init(process.env.NEXT_PUBLIC_HOTJAR_ID, 6);\n    }\n};`,
+  `export const handleGetTotalWalletIncome = (movements) => {\n    let totalIncome = 0;\n    \n    movements.forEach((movement) => {\n        totalIncome += movement.type === 1 ? movement.amount : null;\n    });\n    \n    return totalIncome;\n};`,
+  `const handleAddObjectToAnArray = (object) => {\n    setObjects([...objects, object]);\n};`,
+  `const multiplyByTwo = function(num){\n    return num * 2;\n};`,
+  `const printName = (first, last) => {\n    console.log("first, last");\n};`,
+  `const func = function(arg1, arg2, ..., argN) {\n    return expression;\n};`,
+  `const filteredArray = (array) => {\n    return array.filter( num => num % 2 == 0);\n};`,
+  `const handleIsAppleDevice = {\n    return /Mac|iPod|iPhone|iPad/.test(navigator.platform);\n};`,
+  `const handleGetTimeFromDate = (date) => {\n    return date.toTimeString().slice(0, 8);\n};`,
+  `const handleGetDayOfYear = (date) => {\n    return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);\n};`,
+  `const randomArrayItem = (arr) =>{\n    return arr[Math.floor(Math.random() * arr.length)];\n};`,
+  `const isGreaterThan20 = (num) => {\n    if(num >20) {\n        return console.log("Is greater than 20);\n    } else {\n        return console.log("Is not greater than 20");\n    }\n}`,
+  `const getSelectedText = () => {\n    return window.getSelection().toString();\n};`,
+  `const generateARandomString = () => {\n    return Math.random().toString(36).slice(2);\n};`,
+  `const isAWeekendDay = (date) => {\n    return [0, 6].indexOf(date.getDay()) !== -1;\n};`,
+];
+
+export const typeScriptCodes: string[] = [
+  "import React from 'react';\nimport { Code } from '@mantine/core';\n\nfunction Demo() {\n    return <Code>React.createElement()</Code>;\n}",
+  "export const hotjarInit = (): void => {\n    if (window.location.protocol === HOTJAR_PROTOCOLS.HTTPS) {\n        Hotjar.init(process.env.NEXT_PUBLIC_HOTJAR_ID, 6);\n    }\n};",
+  "import { Movement } from 'lib';\n\nexport const handleGetTotalWalletIncome = (movements: Movement[]): number => {\n    let totalIncome = 0;\n    movements.forEach((movement: Movement) => {\n        totalIncome += movement.type === 1 ? movement.amount : 0;\n    });\n    return totalIncome;\n};",
+  "const handleAddObjectToAnArray = (object: ObjectType): void => {\n    setObjects([...objects, object]);\n};",
+  "const multiplyANumberByTwo = (num: number): number => {\n    return num * 2;\n};",
+  "const printName = (first: string, last: string): void => {\n    console.log(`${first}, ${last}`);\n};",
+  "const function = (arg1: Type1, arg2: Type2, ..., argN: TypeN): ReturnType => {\n    return expression;\n};",
+  "const filteredArray = (array: number[]): number[] => {\n    return array.filter(num => num % 2 === 0);\n};",
+  "const handleIsAppleDevice = (): boolean => {\n    return /Mac|iPod|iPhone|iPad/.test(navigator.platform);\n};",
+  "const handleGetTimeFromDate = (date: Date): string => {\n    return date.toTimeString().slice(0, 8);\n};",
+  "const handleGetDayOfYear = (date: Date): number => {\n    return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);\n};",
+  "const randomArrayItem = (arr: any[]): any[] => {\n    return arr[Math.floor(Math.random() * arr.length)];\n};",
+  "const isGreaterThan20 = (num: number): void => {\n    if (num > 20) {\n        console.log('Is greater than 20');\n    }\n    else {\n        console.log('Is not greater than 20');\n    }\n};",
+  "const getSelectedText = (): string => {\n    return window.getSelection()?.toString() || '';\n};",
+  "const generateARandomString = (): string => {\n    return Math.random().toString(36).slice(2);\n};",
+  "const isAWeekendDay = (date: Date): boolean => {\n    return [0, 6].includes(date.getDay());\n};",
+];
+
+export const pythonCodes: string[] = [
+  `def add_numbers(a, b):\n    return a + b`,
+  `def subtract_numbers(a, b):\n    return a - b`,
+  `def multiply_numbers(a, b):\n    return a * b`,
+  `def divide_numbers(a, b):\n    if b == 0:\n        return "Error: Division by zero"\n    return a / b`,
+  `def calculate_average(numbers):\n    if len(numbers) == 0:\n        return 0\n    return sum(numbers) / len(numbers)`,
+  `def is_even(number):\n    return number % 2 == 0`,
+  `def is_prime(number):\n    if number <= 1:\n        return False\n    for i in range(2, int(number**0.5) + 1):\n        if number % i == 0:\n            return False\n    return True`,
+  `def reverse_string(string):\n    return string[::-1]`,
+  `def get_factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * get_factorial(n - 1)`,
+  `def count_vowels(string):\n    vowels = "AEIOUaeiou"\n    count = 0\n    for char in string:\n        if char in vowels:\n            count += 1\n    return count`,
+  `def capitalize_string(string):\n    return string.capitalize()`,
+  `def get_square_root(x):\n    if x < 0:\n        return "Error: Imaginary result"\n    else:\n        return x**0.5`,
+  `def check_palindrome(string):\n    return string == string[::-1]`,
+  `def find_max(numbers):\n    if len(numbers) == 0:\n        return None\n    else:\n        return max(numbers)`,
+  `def get_random_object_of_an_array(arr):\n    if len(arr) == 0:\n        return None\n    element = random.choice(arr)\n    return element`,
+];
