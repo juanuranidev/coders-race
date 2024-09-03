@@ -1,9 +1,9 @@
 import { Code } from "lib/entities/code/domain/entities/code.entity";
 import { CodeRepository } from "lib/entities/code/domain/repositories/code.repository";
 import { Client, Pool } from "pg";
-import * as schema from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
+import * as schema from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
 import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import { codes } from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
+import { codes } from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
 
 export class CodePostgresRepository implements CodeRepository {
   private dbClient: NodePgDatabase<typeof schema>;
