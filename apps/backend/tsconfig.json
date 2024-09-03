@@ -15,7 +15,7 @@
       "@race/*": ["lib/entities/race/*"],
       "@user/*": ["lib/entities/user/*"],
       "@shared/*": ["lib/shared/*"],
-      "@server/*": ["server/*"]
+      "@server/*": ["lib/entities/server/*"]
     }
   },
   "exclude": ["node_modules"]
