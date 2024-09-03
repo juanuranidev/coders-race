@@ -1,5 +1,5 @@
-import { codes } from "@code/infrastructure/dbs/postgres/schemas/code.schemas";
-import { languages } from "@language/infrastructure/dbs/postgres/schemas/language.schemas";
+import { codes } from "@code/infraestructure/dbs/postgres/schemas/code.schemas";
+import { languages } from "@language/infraestructure/dbs/postgres/schemas/language.schemas";
 import { pgTable, integer, uuid } from "drizzle-orm/pg-core";
 
 export const races = pgTable("races", {

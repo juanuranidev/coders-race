@@ -1,9 +1,8 @@
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import { Language } from "@language/domain/entities/language.entity";
 import { Race } from "@race/domain/entities/race.entity";
+import { Client } from "pg";
+import * as schema from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
 import { RaceRepository } from "@race/domain/repositories/race.repository";
-import { Client, Pool } from "pg";
-import * as schema from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
+import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
 
 export class RacePostgresRepository implements RaceRepository {
   private dbClient: NodePgDatabase<typeof schema>;
