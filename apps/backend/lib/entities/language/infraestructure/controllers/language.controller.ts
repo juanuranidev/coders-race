@@ -1,10 +1,14 @@
+import { Language } from "@language/domain/entities/language.entity";
 import { ServiceContainer } from "@shared/infraestructure/container/service.container";
 import { Response, Request, NextFunction } from "express";
 
 export class LanguageController {
   async readAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const languages = await ServiceContainer.language.readAll.run();
+      const entities = await ServiceContainer.language.readAll.run();
+      const languages = entities.map((language: Language) =>
+        language.mapToPrimitives()
+      );
 
       res.status(201).json(languages);
     } catch (error) {
