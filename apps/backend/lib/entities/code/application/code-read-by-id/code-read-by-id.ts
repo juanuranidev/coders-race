@@ -1,10 +1,10 @@
 import { Code } from "@code/domain/entities/code.entity";
 import { CodeRepository } from "@code/domain/repositories/code.repository";
 
-export class CodeReadRandom {
+export class CodeReadById {
   constructor(private repository: CodeRepository) {}
 
-  async run(): Promise<Code> {
-    return this.repository.readRandom();
+  async run(codeId: number): Promise<Code> {
+    return this.repository.readById(codeId);
   }
 }

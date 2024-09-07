@@ -1,35 +1,63 @@
+import { Code } from "@code/domain/entities/code.entity";
+import { Language } from "@language/domain/entities/language.entity";
 import { ServiceContainer } from "@shared/infraestructure/container/service.container";
+import { MissingCodeIdError } from "@code/domain/errors/code-missing-id.errors";
+import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
+import { MissingLanguageNameError } from "@language/domain/errors/language-missing-name.errors";
 import { Response, Request, NextFunction } from "express";
 
 export class CodeController {
-  async create(req: Request, res: Response, next: NextFunction) {
+  async readById(req: Request, res: Response, next: NextFunction) {
     try {
-      const { text, languageName } = req.body;
-      console.log(languageName);
-      const language =
-        await ServiceContainer.language.readByName.run(languageName);
+      const { codeId } = req.query;
+      if (!codeId) {
+        throw new MissingCodeIdError();
+      }
 
-      console.log(language);
-
-      const codeCreated = await ServiceContainer.code.create.run(
-        text,
-        language
+      const codeEntity: Code = await ServiceContainer.code.readById.run(
+        Number(codeId)
       );
 
-      res.status(201).json(codeCreated);
+      res.status(201).json(codeEntity.mapToPrimitives());
     } catch (error) {
       console.log(error);
+
+      if (error instanceof MissingLanguageNameError) {
+        return res.status(400).json({ error: error.message });
+      } else if (error instanceof LanguageNotFoundError) {
+        return res.status(400).json({ error: error.message });
+      }
+
       next(error);
     }
   }
-
-  async readRandom(req: Request, res: Response, next: NextFunction) {
+  async readRandomByLanguage(req: Request, res: Response, next: NextFunction) {
     try {
-      const randomCode = await ServiceContainer.code.readRandom.run();
+      const { languageName } = req.query;
+      if (!languageName) {
+        throw new MissingLanguageNameError();
+      }
 
-      res.status(201).json(randomCode);
+      const language: Language = await ServiceContainer.language.readByName.run(
+        String(languageName)
+      );
+      if (!language) {
+        throw new LanguageNotFoundError();
+      }
+
+      const codeEntity: Code =
+        await ServiceContainer.code.readRandomByLanguageName.run(language);
+
+      res.status(201).json(codeEntity.mapToPrimitives());
     } catch (error) {
       console.log(error);
+
+      if (error instanceof MissingLanguageNameError) {
+        return res.status(400).json({ error: error.message });
+      } else if (error instanceof LanguageNotFoundError) {
+        return res.status(400).json({ error: error.message });
+      }
+
       next(error);
     }
   }

@@ -6,8 +6,11 @@ export class CodeRouter {
     const router = Router();
     const codeController = new CodeController();
 
-    router.post("/v1/create", codeController.create);
-    router.get("/v1/read-random", codeController.readRandom);
+    router.get("/v1/read-by-id", codeController.readById);
+    router.get(
+      "/v1/read-random-by-language",
+      codeController.readRandomByLanguage
+    );
     return router;
   }
 }
