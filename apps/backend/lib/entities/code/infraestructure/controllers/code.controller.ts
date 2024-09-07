@@ -5,6 +5,7 @@ import { MissingCodeIdError } from "@code/domain/errors/code-missing-id.errors";
 import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
 import { MissingLanguageNameError } from "@language/domain/errors/language-missing-name.errors";
 import { Response, Request, NextFunction } from "express";
+import { CodeNotFoundError } from "@code/domain/errors/code-not-found";
 
 export class CodeController {
   async readById(req: Request, res: Response, next: NextFunction) {
@@ -18,14 +19,18 @@ export class CodeController {
         Number(codeId)
       );
 
-      res.status(201).json(codeEntity.mapToPrimitives());
+      res.status(200).json(codeEntity.mapToPrimitives());
     } catch (error) {
       console.log(error);
 
-      if (error instanceof MissingLanguageNameError) {
+      if (error instanceof MissingCodeIdError) {
+        return res.status(400).json({ error: error.message });
+      } else if (error instanceof CodeNotFoundError) {
+        return res.status(404).json({ error: error.message });
+      } else if (error instanceof MissingLanguageNameError) {
         return res.status(400).json({ error: error.message });
       } else if (error instanceof LanguageNotFoundError) {
-        return res.status(400).json({ error: error.message });
+        return res.status(404).json({ error: error.message });
       }
 
       next(error);
@@ -55,7 +60,7 @@ export class CodeController {
       if (error instanceof MissingLanguageNameError) {
         return res.status(400).json({ error: error.message });
       } else if (error instanceof LanguageNotFoundError) {
-        return res.status(400).json({ error: error.message });
+        return res.status(404).json({ error: error.message });
       }
 
       next(error);
