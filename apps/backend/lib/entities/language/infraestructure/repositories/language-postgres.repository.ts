@@ -1,11 +1,14 @@
+import { eq } from "drizzle-orm";
 import { Client } from "pg";
+import * as schema from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
 import { Language } from "@language/domain/entities/language.entity";
 import { LanguageRepository } from "@language/domain/repositories/language.repository";
+import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
 import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import * as schema from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
-import { languages } from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
-import { LanguageId } from "@language/domain/values-objects/language-id.value-object";
-import { LanguageName } from "@language/domain/values-objects/language-name.value-object";
+import {
+  languages,
+  LanguagePostgres,
+} from "@shared/infraestructure/dbs/postgres/schemas/postgres.schemas";
 
 export class LanguagePostgresRepository implements LanguageRepository {
   private dbClient: NodePgDatabase<typeof schema>;
@@ -18,16 +21,29 @@ export class LanguagePostgresRepository implements LanguageRepository {
 
     this.dbClient = drizzle(client, { schema });
   }
-  private mapToDomain(language: any): Language {
+  private mapPostgresLanguageToEntity(language: LanguagePostgres): Language {
     return new Language(language.id, language.name);
   }
 
   async readAll(): Promise<Language[]> {
-    const languagesList = await this.dbClient.select().from(languages);
+    const languagesList: LanguagePostgres[] = await this.dbClient
+      .select()
+      .from(languages);
 
-    return languagesList.map((language) => this.mapToDomain(language));
+    return languagesList.map((language: LanguagePostgres) =>
+      this.mapPostgresLanguageToEntity(language)
+    );
   }
-  readByName(name: string): Promise<Language> {
-    throw new Error("Method not implemented.");
+  async readByName(languageName: string): Promise<Language> {
+    const [language]: LanguagePostgres[] = await this.dbClient
+      .select()
+      .from(languages)
+      .where(eq(languages.name, languageName));
+
+    if (!language) {
+      throw new LanguageNotFoundError();
+    }
+
+    return this.mapPostgresLanguageToEntity(language);
   }
 }

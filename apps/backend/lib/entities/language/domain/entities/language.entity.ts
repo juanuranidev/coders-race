@@ -10,17 +10,18 @@ export class Language {
     this.name = new LanguageName(name);
   }
 
+  public getId(): number {
+    return this.id.value;
+  }
+
+  public getName(): string {
+    return this.name.value;
+  }
+
   public mapToPrimitives() {
     return {
       id: this.id.value,
       name: this.name.value,
     };
-  }
-
-  public getId(): number {
-    return this.id.value;
-  }
-  public getName(): string {
-    return this.name.value;
   }
 }

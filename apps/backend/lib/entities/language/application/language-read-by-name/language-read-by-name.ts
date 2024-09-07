@@ -4,7 +4,7 @@ import { LanguageRepository } from "@language/domain/repositories/language.repos
 export class LanguageReadByName {
   constructor(private repository: LanguageRepository) {}
 
-  async run(name: string): Promise<Language> {
-    return this.repository.readByName(name);
+  async run(languageName: string): Promise<Language> {
+    return this.repository.readByName(languageName);
   }
 }
