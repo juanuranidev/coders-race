@@ -1,6 +1,6 @@
 import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
 
-export interface LanguagePostgres {
+export interface PostgresLanguage {
   id: number;
   name: string;
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { LanguageController } from "@language/infraestructure/controllers/language.controller";
+import { LanguageController } from "@language/infrastructure/controllers/language.controller";
 
 export class LanguageRouter {
   static get routes(): Router {

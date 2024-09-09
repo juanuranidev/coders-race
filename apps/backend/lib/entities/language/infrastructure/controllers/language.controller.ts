@@ -1,5 +1,5 @@
 import { Language } from "@language/domain/entities/language.entity";
-import { ServiceContainer } from "@shared/infraestructure/container/service.container";
+import { ServiceContainer } from "@shared/infrastructure/container/service.container";
 import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
 import { MissingLanguageNameError } from "@language/domain/errors/language-missing-name.errors";
 import { Response, Request, NextFunction } from "express";
@@ -14,7 +14,7 @@ export class LanguageController {
         (language: Language) => language.mapToPrimitives()
       );
 
-      res.status(201).json(languagesInPrimitives);
+      res.status(200).json(languagesInPrimitives);
     } catch (error) {
       console.log(error);
       next(error);
@@ -24,16 +24,16 @@ export class LanguageController {
   async readByName(req: Request, res: Response, next: NextFunction) {
     try {
       const { languageName } = req.query;
-
       if (!languageName) {
-        throw new MissingLanguageNameError();
+        return res
+          .status(404)
+          .json({ message: "Missing languageName parameter" });
       }
 
       const languageEntity: Language =
         await ServiceContainer.language.readByName.run(String(languageName));
-      const languageInPrimitives = languageEntity.mapToPrimitives();
 
-      res.status(201).json(languageInPrimitives);
+      res.status(200).json(languageEntity.mapToPrimitives());
     } catch (error) {
       console.log(error);
 
