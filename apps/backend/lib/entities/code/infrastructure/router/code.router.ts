@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CodeController } from "@code/infraestructure/controllers/code.controller";
+import { CodeController } from "@code/infrastructure/controllers/code.controller";
 
 export class CodeRouter {
   static get routes(): Router {

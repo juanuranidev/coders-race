@@ -1,6 +1,6 @@
 import { Code } from "@code/domain/entities/code.entity";
 import { Language } from "@language/domain/entities/language.entity";
-import { ServiceContainer } from "@shared/infraestructure/container/service.container";
+import { ServiceContainer } from "@shared/infrastructure/container/service.container";
 import { MissingCodeIdError } from "@code/domain/errors/code-missing-id.errors";
 import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
 import { MissingLanguageNameError } from "@language/domain/errors/language-missing-name.errors";
@@ -12,7 +12,7 @@ export class CodeController {
     try {
       const { codeId } = req.query;
       if (!codeId) {
-        throw new MissingCodeIdError();
+        return res.status(400).json({ error: "Missing codeId parameter" });
       }
 
       const codeEntity: Code = await ServiceContainer.code.readById.run(
@@ -40,15 +40,14 @@ export class CodeController {
     try {
       const { languageName } = req.query;
       if (!languageName) {
-        throw new MissingLanguageNameError();
+        return res
+          .status(400)
+          .json({ error: "missing languageName parameter" });
       }
 
       const language: Language = await ServiceContainer.language.readByName.run(
         String(languageName)
       );
-      if (!language) {
-        throw new LanguageNotFoundError();
-      }
 
       const codeEntity: Code =
         await ServiceContainer.code.readRandomByLanguageName.run(language);

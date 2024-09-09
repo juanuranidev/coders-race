@@ -5,9 +5,9 @@ import { Language } from "@language/domain/entities/language.entity";
 export class Code {
   id: CodeId;
   text: CodeText;
-  language?: Language;
+  language: Language;
 
-  constructor(id: number, text: string, language?: Language) {
+  constructor(id: number, text: string, language: Language) {
     this.id = new CodeId(id);
     this.text = new CodeText(text);
     this.language = language;
@@ -20,7 +20,7 @@ export class Code {
     return this.text.value;
   }
 
-  public getLanguage(): Language | undefined {
+  public getLanguage(): Language {
     return this.language;
   }
 
@@ -28,7 +28,7 @@ export class Code {
     return {
       id: this.id.value,
       text: this.text.value,
-      language: this.language ? this.language.mapToPrimitives() : undefined,
+      language: this.language.mapToPrimitives(),
     };
   }
 }
