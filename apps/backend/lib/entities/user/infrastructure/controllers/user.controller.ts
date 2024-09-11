@@ -1,4 +1,4 @@
-import { ServiceContainer } from "@shared/infraestructure/container/service.container";
+import { ServiceContainer } from "@shared/infrastructure/container/service.container";
 import { Response, Request, NextFunction } from "express";
 
 export class UserController {
