@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { RaceController } from "@race/infraestructure/controllers/race.controller";
+import { RaceController } from "@race/infrastructure/controllers/race.controller";
 
 export class RaceRouter {
   static get routes(): Router {

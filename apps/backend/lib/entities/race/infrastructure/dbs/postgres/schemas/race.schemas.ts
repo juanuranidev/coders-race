@@ -1,6 +1,20 @@
-import { codes } from "@code/infraestructure/dbs/postgres/schemas/code.schemas";
-import { languages } from "@language/infraestructure/dbs/postgres/schemas/language.schemas";
+import { codes } from "@code/infrastructure/dbs/postgres/schemas/code.schemas";
+import { languages } from "@language/infrastructure/dbs/postgres/schemas/language.schemas";
 import { pgTable, integer, uuid } from "drizzle-orm/pg-core";
+
+export interface PostgresRace {
+  id: string;
+  code: {
+    id: number;
+    text: string;
+  } | null;
+  cpm: number;
+  timeInMS: number;
+  language: {
+    id: number;
+    name: string;
+  } | null;
+}
 
 export const races = pgTable("races", {
   id: uuid("id").primaryKey().notNull(),
