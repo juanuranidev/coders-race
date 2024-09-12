@@ -1,17 +1,17 @@
-import { CodeCreate } from "@code/application/code-create/code-create";
-import { CodeReadRandom } from "@code/application/code-read-random/code-read-random";
-import { CodePostgresRepository } from "@code/infraestructure/repositories/code-postgres.repository";
-import { LanguageReadAll } from "@language/application/language-read-all/language-read-all";
-import { LanguageReadByName } from "@language/application/language-read-by-name/language-read-by-name";
-import { LanguagePostgresRepository } from "@language/infraestructure/repositories/language-postgres.repository";
+import ENVS from "../config/envs/envs";
 import { RaceCreate } from "@race/application/race-create/race-create";
 import { RaceReadById } from "@race/application/race-read-by-id/race-read-by-id";
-import { RacePostgresRepository } from "@race/infraestructure/repositories/race-postgres.repository";
-import { UserReadByGithubId } from "@user/application/user-read-by-github-id/user-read-by-github-id";
 import { UserReadById } from "@user/application/user-read-by-id/user-read-by-id";
+import { CodeReadById } from "@code/application/code-read-by-id/code-read-by-id";
+import { LanguageReadAll } from "@language/application/language-read-all/language-read-all";
+import { LanguageReadByName } from "@language/application/language-read-by-name/language-read-by-name";
+import { UserReadByGithubId } from "@user/application/user-read-by-github-id/user-read-by-github-id";
+import { RacePostgresRepository } from "@race/infrastructure/repositories/race-postgres.repository";
+import { CodePostgresRepository } from "@code/infrastructure/repositories/code-postgres.repository";
 import { UserReadAllLeaderboard } from "@user/application/users-read-all-leaderboard/user-read-all-leaderboard";
-import { UserPostgresRepository } from "@user/infraestructure/repositories/user-postgres.repository";
-import ENVS from "../config/envs/envs";
+import { UserPostgresRepository } from "@user/infrastructure/repositories/user-postgres.repository";
+import { CodeReadRandomByLanguage } from "@code/application/code-read-random-by-language/code-read-random-by-language";
+import { LanguagePostgresRepository } from "@language/infrastructure/repositories/language-postgres.repository";
 
 const codeRepositoryPostgres = new CodePostgresRepository(ENVS.POSTGRES_URL);
 const raceRepositoryPostgres = new RacePostgresRepository(ENVS.POSTGRES_URL);
@@ -22,8 +22,10 @@ const languageRepositoryPostgres = new LanguagePostgresRepository(
 
 export const ServiceContainer = {
   code: {
-    create: new CodeCreate(codeRepositoryPostgres),
-    readRandom: new CodeReadRandom(codeRepositoryPostgres),
+    readById: new CodeReadById(codeRepositoryPostgres),
+    readRandomByLanguageName: new CodeReadRandomByLanguage(
+      codeRepositoryPostgres
+    ),
   },
   language: {
     readAll: new LanguageReadAll(languageRepositoryPostgres),

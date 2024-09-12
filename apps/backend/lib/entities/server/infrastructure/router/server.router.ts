@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { CodeRouter } from "@code/infraestructure/router/code.router";
-import { RaceRouter } from "@race/infraestructure/router/race.router";
-import { UserRouter } from "@user/infraestructure/router/user.router";
-import { LanguageRouter } from "@language/infraestructure/router/language.router";
+import { CodeRouter } from "@code/infrastructure/router/code.router";
+import { RaceRouter } from "@race/infrastructure/router/race.router";
+import { UserRouter } from "@user/infrastructure/router/user.router";
+import { LanguageRouter } from "@language/infrastructure/router/language.router";
 
 export class ServerRouter {
   static get routes(): Router {
