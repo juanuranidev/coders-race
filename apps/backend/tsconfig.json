@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "commonjs",
-    "rootDir": "./",
     "baseUrl": "./",
     "outDir": "dist/",
     "esModuleInterop": true,
@@ -18,5 +17,8 @@
       "@server/*": ["lib/entities/server/*"]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }

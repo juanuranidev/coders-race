@@ -1,3 +1,5 @@
 node_modules
 postgres-db-data
 docker-data
+dist
+frontend-deprecated
