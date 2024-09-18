@@ -1,3 +1,4 @@
+import PublicLayout from "layouts/public/public-layout";
 import { lazy, Suspense, ComponentType } from "react";
 
 const Loadable =
@@ -10,8 +11,13 @@ const Loadable =
 const HomeView = Loadable(lazy(() => import("pages/public/home/home")));
 
 const PublicRoutes = {
-  element: <HomeView />,
-  children: [],
+  element: <PublicLayout />,
+  children: [
+    {
+      path: "/",
+      element: <HomeView />,
+    },
+  ],
 };
 
 export default PublicRoutes;
