@@ -11,21 +11,21 @@ export default function Navbar({}) {
           <a
             href="/"
             color="secondary"
-            className="font-light text-white-500 hover:underline"
+            className="font-medium text-white-500"
           >
             Inicio
           </a>
           <a
             href="/play"
             color="secondary"
-            className="font-medium text-white-500 hover:underline"
+            className="font-medium text-white-500"
           >
             Jugar
           </a>
           <a
             href="/ranking"
             color="secondary"
-            className="font-semibold text-white-500 hover:underline"
+            className="font-medium text-white-500"
           >
             Ranking
           </a>
