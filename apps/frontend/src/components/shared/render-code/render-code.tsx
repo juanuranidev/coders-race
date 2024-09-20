@@ -1,4 +1,4 @@
-import Character from "components/shared/renderCode/components/character/character";
+import Character from "components/shared/render-code/components/character/character";
 
 interface Props {
   code: string;

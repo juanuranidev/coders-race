@@ -10,6 +10,7 @@ export default function Character({ character, index, input }: Props) {
   const isSpace: boolean = character === "\n";
   const isExpected: boolean = input.length === index;
   const isCompleted: boolean = input.length > index;
+  
   const SPACE_CHARACTER: string = "↵ \n";
 
   const characterClass = classNames("text-white-500", "text-xl", "inline", {

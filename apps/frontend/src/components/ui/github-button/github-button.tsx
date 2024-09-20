@@ -1,11 +1,9 @@
-import React from "react";
 import GitHubIcon from "assets/icons/GitHub.svg";
 
 export default function GitHubButton({
   text,
   onClick,
   disabled,
-  children,
 }: any) {
   return (
     <button
