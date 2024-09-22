@@ -5,7 +5,9 @@ export default function PublicLayout() {
   return (
     <div className="bg-background-dark min-h-[100vh]">
       <Navbar />
-      <Outlet />
+      <div className="container mx-auto px-0 pt-10">
+        <Outlet />
+      </div>
     </div>
   );
 }
