@@ -9,6 +9,7 @@ const Loadable =
   );
 
 const HomeView = Loadable(lazy(() => import("pages/public/home/home")));
+const PlayView = Loadable(lazy(() => import("pages/public/play/play")));
 
 const PublicRoutes = {
   element: <PublicLayout />,
@@ -16,6 +17,10 @@ const PublicRoutes = {
     {
       path: "/",
       element: <HomeView />,
+    },
+    {
+      path: "/play",
+      element: <PlayView />,
     },
   ],
 };

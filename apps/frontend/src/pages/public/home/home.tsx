@@ -4,7 +4,6 @@ import PrimaryButton from "components/ui/primary-button/primary-button";
 import BackgroundCode from "pages/public/home/components/background-code/background-code";
 import { CODE_CONSTANTS } from "lib/constants/code/code.constants";
 import { useCompleteInput } from "hooks/code/useCompleteInput";
-import Loader from "components/ui/loader/loader";
 
 export default function Home() {
   const { inputValue, handleCompleteInput } = useCompleteInput({
