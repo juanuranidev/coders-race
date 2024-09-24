@@ -1,4 +1,4 @@
-import CardDemo from "components/blocks/cards-demo-1";
+import GamemodeCard from "pages/public/play/components/gamemode-card/gamemode-card";
 
 export default function Play() {
   return (
@@ -6,9 +6,9 @@ export default function Play() {
       <p className="text-white-500 font-medium text-lg mb-10">
         Elige tu modo de juego
       </p>
-      <div className="flex flex-wrap gap-10">
-        <div className="w-[calc(50%-20px)]">
-          <CardDemo
+      <div className="flex flex-wrap justify-between gap-[20px]">
+        <div className="w-[calc(33.33%-20px)]">
+          <GamemodeCard
             imageUrl={
               "https://res.cloudinary.com/dhodvztdx/image/upload/v1726979372/coders-race/GamemodeCar1_cdazxb.png"
             }
@@ -19,8 +19,8 @@ export default function Play() {
             subtitle="Mejora tu velocidad de programación a tu propio ritmo mediante la práctica."
           />
         </div>
-        <div className="w-[calc(50%-20px)]">
-          <CardDemo
+        <div className="w-[calc(33.33%-20px)]">
+          <GamemodeCard
             imageUrl={
               "https://res.cloudinary.com/dhodvztdx/image/upload/v1726979372/coders-race/GamemodeCar1_cdazxb.png"
             }
@@ -31,8 +31,8 @@ export default function Play() {
             subtitle="Compite y pon a prueba tus habilidades, cada partida se guardará en tu perfil."
           />
         </div>
-        <div className="w-[calc(50%-20px)]">
-          <CardDemo
+        <div className="w-[calc(33.33%-20px)]">
+          <GamemodeCard
             imageUrl={
               "https://res.cloudinary.com/dhodvztdx/image/upload/v1726979372/coders-race/GamemodeCar1_cdazxb.png"
             }
