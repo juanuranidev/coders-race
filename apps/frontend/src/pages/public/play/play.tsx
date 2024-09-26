@@ -9,23 +9,23 @@ export default function Play() {
       <div className="flex flex-wrap justify-between gap-[20px]">
         <div className="w-[calc(33.33%-20px)]">
           <GamemodeCard
-            gamemodeGif="https://paralelo32cdn.eleco.com.ar/media/2017/08/Como-Subir-un-GIF-a-Facebook-Twitter-e-Instagram.gif"
             title="Practicar"
             subtitle="Mejora tu velocidad de programación a tu propio ritmo mediante la práctica."
+            gamemodeGif="https://paralelo32cdn.eleco.com.ar/media/2017/08/Como-Subir-un-GIF-a-Facebook-Twitter-e-Instagram.gif"
           />
         </div>
         <div className="w-[calc(33.33%-20px)]">
           <GamemodeCard
-            gamemodeGif="https://paralelo32cdn.eleco.com.ar/media/2017/08/Como-Subir-un-GIF-a-Facebook-Twitter-e-Instagram.gif"
             title="Competir"
             subtitle="Compite y pon a prueba tus habilidades, cada partida se guardará en tu perfil."
+            gamemodeGif="https://paralelo32cdn.eleco.com.ar/media/2017/08/Como-Subir-un-GIF-a-Facebook-Twitter-e-Instagram.gif"
           />
         </div>
         <div className="w-[calc(33.33%-20px)]">
           <GamemodeCard
-            gamemodeGif="https://paralelo32cdn.eleco.com.ar/media/2017/08/Como-Subir-un-GIF-a-Facebook-Twitter-e-Instagram.gif"
             title="Torneo"
             subtitle="Participa en competencias organizadas"
+            gamemodeGif="https://paralelo32cdn.eleco.com.ar/media/2017/08/Como-Subir-un-GIF-a-Facebook-Twitter-e-Instagram.gif"
           />
         </div>
       </div>

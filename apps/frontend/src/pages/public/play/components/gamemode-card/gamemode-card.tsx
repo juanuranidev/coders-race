@@ -1,40 +1,37 @@
-"use client";
-import PrimaryButton from "components/ui/primary-button/primary-button";
 import { useState } from "react";
+import { Language } from "lib/interfaces/language/language.interfaces";
+import PrimaryButton from "components/ui/primary-button/primary-button";
 import SelectLanguage from "components/shared/select-language/select-language";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
 
-interface CardDemoProps {
-  gamemodeGif: string;
+interface GamemodeCardProps {
   title: string;
   subtitle: string;
+  gamemodeGif: string;
 }
 
-export default function CardDemo({
-  gamemodeGif,
+export default function GamemodeCard({
   title,
   subtitle,
-}: CardDemoProps) {
+  gamemodeGif,
+}: GamemodeCardProps) {
   const navigate: NavigateFunction = useNavigate();
-  const [selectedLanguage, setSelectedLanguage] = useState<any>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(
+    null
+  );
 
-  const handleStartGame = () => {
-    console.log(selectedLanguage);
-
-    const url: string = `/race/${title.toLowerCase()}/${selectedLanguage.value}`;
+  const handleStartRace = () => {
+    const url: string = `/race/${title.toLowerCase()}/${selectedLanguage?.name?.toLowerCase()}`;
 
     navigate(url);
-    console.log(url);
   };
 
   return (
     <div className="overflow-visible">
       <div className="relative w-full h-48">
         <div
-          className="absolute inset-0 transition-all duration-500 rounded-t-xl"
+          className="absolute inset-0 transition-all duration-500 rounded-t-xl bg-cover bg-center bg-no-repeat w-full h-full bg-black"
           style={{
-            backgroundSize: "cover",
-            backgroundPosition: "center",
             backgroundImage: `url(${gamemodeGif})`,
           }}
         />
@@ -53,7 +50,7 @@ export default function CardDemo({
             />
             <PrimaryButton
               text="Comenzar"
-              onClick={handleStartGame}
+              onClick={handleStartRace}
               disabled={!selectedLanguage}
             />
           </div>
