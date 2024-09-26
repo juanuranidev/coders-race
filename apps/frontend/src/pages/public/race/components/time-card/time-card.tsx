@@ -1,8 +1,8 @@
 import { formatMillisecondsToSeconds } from "lib/utils/race";
 
-type Props = {
+interface Props {
   milliseconds: number;
-};
+}
 
 export default function TimeCard({ milliseconds }: Props) {
   return (
