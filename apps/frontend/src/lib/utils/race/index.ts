@@ -1,3 +1,3 @@
-export const formatMillisecondsToSeconds = (milliseconds: number): number => {
-  return milliseconds / 1000;
+export const formatMillisecondsToSeconds = (milliseconds: number): string => {
+  return (milliseconds / 1000).toFixed(2);
 };
