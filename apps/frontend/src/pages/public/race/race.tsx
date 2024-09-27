@@ -4,7 +4,6 @@ import useMillisecondCounter from "hooks/code/useMilisecondsCounter";
 import useCPSCounter from "hooks/code/useCPSCounter";
 import ProgressCard from "./components/progress-card/progress-card";
 import TimeCard from "./components/time-card/time-card";
-import CPMCard from "./components/cps-card/cps-card";
 import CodeCard from "./components/code-card/code-card";
 import {
   useNavigate,
@@ -13,6 +12,9 @@ import {
 } from "react-router-dom";
 import PrimaryButton from "components/ui/primary-button/primary-button";
 import { useCodeReadRandomByLanguage } from "services/code/queries/code.queries";
+import { useCreateRaceMutation } from "services/race/mutations/race.mutations";
+import RaceStatsView from "./components/race-stats-view/race-stats-view";
+import CPSCard from "./components/cps-card/cps-card";
 
 export default function Race() {
   // Handle params and initial information
@@ -27,23 +29,51 @@ export default function Race() {
   const { inputValue, handleCompleteInput } = useCompleteInput({
     code: code?.text ?? "",
   });
-  const cps: number = useCPSCounter({ milliseconds, inputValue });
+  const { cps } = useCPSCounter({
+    milliseconds,
+    inputValue,
+    codeText: code?.text ?? "",
+  });
 
-  const handleManageCounter = () => {
+  const handleManageCounter = async () => {
     if (inputValue.length > 0 && milliseconds === 0) {
       startCounter();
     }
     if (inputValue.length === code?.text?.length) {
       stopCounter();
+      handleCreateRace();
     }
+  };
+
+  const createRaceMutation = useCreateRaceMutation();
+
+  const handleCreateRace = async () => {
+    const race = {
+      codeId: code?.id,
+      cps: cps,
+      timeInMS: milliseconds,
+    };
+
+    await createRaceMutation.mutateAsync(race);
+    alert("Race created");
   };
 
   useEffect(() => {
     handleManageCounter();
-  }, [inputValue, milliseconds, startCounter, stopCounter]);
+  }, [inputValue]);
   // Handle race information
 
   if (isLoading) return <div>Loading...</div>;
+
+  if (createRaceMutation.isSuccess)
+    return (
+      <RaceStatsView
+        cpm={cps}
+        code={code}
+        timeInMS={milliseconds}
+        inputValue={inputValue}
+      />
+    );
 
   return (
     <div>
@@ -55,10 +85,10 @@ export default function Race() {
           <ProgressCard code={code?.text ?? ""} inputValue={inputValue} />
         </div>
         <div className="col-span-1">
-          <TimeCard milliseconds={milliseconds} />
+          <TimeCard milliseconds={milliseconds} text="Tiempo" />
         </div>
         <div className="col-span-1">
-          <CPMCard cps={cps} />
+          <CPSCard cps={cps} text="CPS" />
         </div>
         <div className="col-span-12 mt-5">
           <CodeCard

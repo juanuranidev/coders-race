@@ -30,16 +30,14 @@ export default function GamemodeCard({
     <div className="overflow-visible">
       <div className="relative w-full h-48">
         <div
+          style={{ backgroundImage: `url(${gamemodeGif})` }}
           className="absolute inset-0 transition-all duration-500 rounded-t-xl bg-cover bg-center bg-no-repeat w-full h-full bg-black"
-          style={{
-            backgroundImage: `url(${gamemodeGif})`,
-          }}
         />
         <div className="absolute inset-0 bg-black bg-opacity-50" />
       </div>
       <div className="p-4 bg-gray-500 flex flex-col justify-between gap-4 rounded-b-xl">
         <div className="flex items-center gap-5">
-          <h1 className="font-bold text-4xl text-white-500">{title}</h1>
+          <h1 className="font-bold text-4xl text-white-400">{title}</h1>
           <p className="font-medium text-sm text-white-400">{subtitle}</p>
         </div>
         <div>
