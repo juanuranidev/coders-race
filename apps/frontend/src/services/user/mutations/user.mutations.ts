@@ -8,7 +8,10 @@ export function useLoginMutation() {
       console.log("User logged in and created:", data);
     },
     onError: (error) => {
-      console.error("Login failed:", error);
+      console.error(
+        "Login failed:",
+        error instanceof Error ? error.message : "Unknown error"
+      );
     },
   });
 }
