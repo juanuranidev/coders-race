@@ -17,3 +17,12 @@ export const readOrCreateUserApi = async (user: {
 
   return response.data;
 };
+
+export const readUserByAuthIdApi = async (authId: string | undefined) => {
+  const response = await request({
+    method: "GET",
+    url: `/user/v1/read-by-auth-id/${authId}`,
+  });
+
+  return response.data;
+};

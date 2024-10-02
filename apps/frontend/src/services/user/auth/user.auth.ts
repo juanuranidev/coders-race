@@ -1,18 +1,15 @@
 import {
-  Auth,
   getAuth,
   UserCredential,
   signInWithPopup,
   GithubAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
-import { readOrCreateUserApi } from "services/user/api/user.api";
+import { readOrCreateUserApi, readUserByAuthIdApi } from "services/user/api/user.api";
 
 export const signInWithGitHubPopupAuth = async (): Promise<UserCredential> => {
-  const auth: Auth = getAuth();
-
   const user: UserCredential = await signInWithPopup(
-    auth,
+    getAuth(),
     new GithubAuthProvider()
   );
 
@@ -21,7 +18,6 @@ export const signInWithGitHubPopupAuth = async (): Promise<UserCredential> => {
 
 export const completeLoginFlow = async (): Promise<any> => {
   const firebaseUser: UserCredential = await signInWithGitHubPopupAuth();
-  console.log({ firebaseUser });
 
   const userData = {
     name: firebaseUser.user.displayName ?? "",
@@ -30,9 +26,7 @@ export const completeLoginFlow = async (): Promise<any> => {
     githubId: firebaseUser.user.providerData[0].uid ?? "",
     githubUsername: firebaseUser.user.displayName ?? "",
   };
-  console.log({ userData });
   const apiUser = await readOrCreateUserApi(userData);
-
   if (!apiUser) {
     throw new Error("Failed to create user in the API");
   }
@@ -41,23 +35,26 @@ export const completeLoginFlow = async (): Promise<any> => {
 };
 
 export const readUserInSession = async (): Promise<any> => {
-  // const auth: Auth = getAuth();
-  // console.log(auth)
-  // const user = auth.currentUser;
-  const user = onAuthStateChanged(getAuth(), (user) => {
-    console.log(user);
+  onAuthStateChanged(getAuth(), async (user) => {
+    try {
+      if (!user) {
+        return null;
+      }
 
+      const apiUser = await readUserByAuthIdApi(user?.uid);
+      if (!apiUser) {
+        await logoutUser();
+        throw new Error("No user in session");
+      }
+
+      return apiUser;
+    } catch (error) {
+      await logoutUser();
+
+    }
   });
-  // const auth: Auth = getAuth();
-  // const user = auth.currentUser;
-  // console.log({ user });
-  if (!user) {
-    throw new Error("No user in session");
-  }
-  return user;
 };
 
 export const logoutUser = async (): Promise<void> => {
-  const auth: Auth = getAuth();
-  await auth.signOut();
+  await getAuth().signOut();
 };
