@@ -26,7 +26,7 @@ export default function RaceStatsView({
       <p className="text-white-400 text-5xl font-semibold text-center">
         ¡Felicidades!
       </p>
-      <p className="text-white-400 text-lg font-semibold text-center">
+      <p className="text-white-500 text-lg font-semibold text-center">
         Estos son las estadísticas de tu carrera
       </p>
       <div className="flex justify-end mb-5 w-full">
