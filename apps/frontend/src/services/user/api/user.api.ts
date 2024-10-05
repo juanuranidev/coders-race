@@ -11,7 +11,7 @@ export const readOrCreateUserApi = async (user: {
     method: "POST",
     url: "/user/v1/read-or-create",
     data: {
-      user
+      user,
     },
   });
 

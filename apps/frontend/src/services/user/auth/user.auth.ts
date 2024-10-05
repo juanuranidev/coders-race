@@ -5,7 +5,10 @@ import {
   GithubAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
-import { readOrCreateUserApi, readUserByAuthIdApi } from "services/user/api/user.api";
+import {
+  readOrCreateUserApi,
+  readUserByAuthIdApi,
+} from "services/user/api/user.api";
 
 export const signInWithGitHubPopupAuth = async (): Promise<UserCredential> => {
   const user: UserCredential = await signInWithPopup(
@@ -35,23 +38,27 @@ export const completeLoginFlow = async (): Promise<any> => {
 };
 
 export const readUserInSession = async (): Promise<any> => {
-  onAuthStateChanged(getAuth(), async (user) => {
-    try {
-      if (!user) {
-        return null;
-      }
+  return new Promise((resolve, reject) => {
+    onAuthStateChanged(getAuth(), async (user) => {
+      try {
+        if (!user) {
+          resolve(null);
+          return;
+        }
 
-      const apiUser = await readUserByAuthIdApi(user?.uid);
-      if (!apiUser) {
+        const apiUser = await readUserByAuthIdApi(user?.uid);
+
+        if (!apiUser) {
+          await logoutUser();
+          reject(new Error("No user in session"));
+          return;
+        }
+        resolve(apiUser);
+      } catch (error) {
         await logoutUser();
-        throw new Error("No user in session");
+        reject(error);
       }
-
-      return apiUser;
-    } catch (error) {
-      await logoutUser();
-
-    }
+    });
   });
 };
 
