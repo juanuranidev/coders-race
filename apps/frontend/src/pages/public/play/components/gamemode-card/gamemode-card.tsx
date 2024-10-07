@@ -3,6 +3,7 @@ import { Language } from "lib/interfaces/language/language.interfaces";
 import PrimaryButton from "components/ui/primary-button/primary-button";
 import SelectLanguage from "components/shared/select-language/select-language";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
+import { ButtonPrimary } from "components/ui/button/button";
 
 interface GamemodeCardProps {
   title: string;
@@ -35,7 +36,7 @@ export default function GamemodeCard({
         />
         <div className="absolute inset-0 bg-black bg-opacity-50" />
       </div>
-      <div className="p-4 bg-gray-500 flex flex-col justify-between gap-4 rounded-b-xl">
+      <div className="p-4 bg-black-400 flex flex-col justify-between gap-4 rounded-b-xl">
         <div className="flex items-center gap-5">
           <h1 className="font-bold text-4xl text-white-400">{title}</h1>
           <p className="font-medium text-sm text-white-400">{subtitle}</p>
@@ -46,11 +47,12 @@ export default function GamemodeCard({
               selectedLanguage={selectedLanguage}
               onLanguageChange={setSelectedLanguage}
             />
-            <PrimaryButton
-              text="Comenzar"
+            <ButtonPrimary
               onClick={handleStartRace}
-              disabled={!selectedLanguage}
-            />
+              disabled={!Boolean(selectedLanguage)}
+            >
+              Comenzar
+            </ButtonPrimary>
           </div>
         </div>
       </div>

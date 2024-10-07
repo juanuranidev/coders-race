@@ -55,7 +55,6 @@ export default function Race() {
     };
 
     await createRaceMutation.mutateAsync(race);
-    alert("Race created");
   };
 
   useEffect(() => {

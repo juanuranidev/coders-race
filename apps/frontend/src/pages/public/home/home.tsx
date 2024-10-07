@@ -1,10 +1,10 @@
 import RenderCode from "components/shared/render-code/render-code";
 import { useEffect } from "react";
-import PrimaryButton from "components/ui/primary-button/primary-button";
 import BackgroundCodes from "components/shared/background-codes/background-codes";
 import { CODE_CONSTANTS } from "lib/constants/code/code.constants";
 import { useCompleteInput } from "hooks/code/useCompleteInput";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
+import { ButtonPrimary } from "components/ui/button/button";
 
 export default function Home() {
   const navigate: NavigateFunction = useNavigate();
@@ -32,7 +32,9 @@ export default function Home() {
             <p className="text-white-400 text-lg font-semibold mb-8">
               ¿Qué tan rápido puedes codear?
             </p>
-            <PrimaryButton text="Comenzar" onClick={() => navigate("/play")} />
+            <ButtonPrimary onClick={() => navigate("/play")}>
+              Jugar
+            </ButtonPrimary>
           </div>
           <RenderCode code={CODE_CONSTANTS.HOME_CODE} input={inputValue} />
         </div>
