@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Language } from "lib/interfaces/language/language.interfaces";
-import PrimaryButton from "components/ui/primary-button/primary-button";
 import SelectLanguage from "components/shared/select-language/select-language";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
 import { ButtonPrimary } from "components/ui/button/button";
@@ -38,8 +37,8 @@ export default function GamemodeCard({
       </div>
       <div className="p-4 bg-black-400 flex flex-col justify-between gap-4 rounded-b-xl">
         <div className="flex items-center gap-5">
-          <h1 className="font-bold text-4xl text-white-400">{title}</h1>
-          <p className="font-medium text-sm text-white-400">{subtitle}</p>
+          <h1 className="font-bold text-4xl text-white-500">{title}</h1>
+          <p className="font-medium text-sm text-white-500">{subtitle}</p>
         </div>
         <div>
           <div className="flex items-center gap-2">

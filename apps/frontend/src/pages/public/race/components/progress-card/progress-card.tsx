@@ -5,7 +5,7 @@ interface Props {
 
 export default function ProgressCard({ code, inputValue }: Props) {
   return (
-    <div className="bg-gray-500 p-5 h-full rounded-lg">
+    <div className="bg-black-400 p-5 h-full rounded-lg">
       <p className="font-semibold text-white-500 text-lg pb-5">Progreso</p>
       <div
         role="progressbar"

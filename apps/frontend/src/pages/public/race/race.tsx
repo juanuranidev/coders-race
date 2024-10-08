@@ -10,11 +10,11 @@ import {
   useParams,
   type NavigateFunction,
 } from "react-router-dom";
-import PrimaryButton from "components/ui/primary-button/primary-button";
 import { useCodeReadRandomByLanguage } from "services/code/queries/code.queries";
 import { useCreateRaceMutation } from "services/race/mutations/race.mutations";
 import RaceStatsView from "./components/race-stats-view/race-stats-view";
 import CPSCard from "./components/cps-card/cps-card";
+import { ButtonOutline } from "components/ui/button/button";
 
 export default function Race() {
   // Handle params and initial information
@@ -77,16 +77,16 @@ export default function Race() {
   return (
     <div>
       <div className="flex justify-end mb-5">
-        <PrimaryButton onClick={() => navigate("/play")} text="Volver" />
+        <ButtonOutline onClick={() => navigate("/play")}>Volver</ButtonOutline>
       </div>
       <div className="grid grid-cols-12 gap-x-5 mb-5">
-        <div className="col-span-10">
+        <div className="col-span-8">
           <ProgressCard code={code?.text ?? ""} inputValue={inputValue} />
         </div>
-        <div className="col-span-1">
+        <div className="col-span-2">
           <TimeCard milliseconds={milliseconds} text="Tiempo" />
         </div>
-        <div className="col-span-1">
+        <div className="col-span-2">
           <CPSCard cps={cps} text="CPS" />
         </div>
         <div className="col-span-12 mt-5">

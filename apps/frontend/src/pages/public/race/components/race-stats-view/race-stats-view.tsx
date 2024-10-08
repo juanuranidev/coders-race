@@ -1,10 +1,10 @@
-import PrimaryButton from "components/ui/primary-button/primary-button";
 import { Code } from "lib/interfaces/code/code.interfaces";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import TimeCard from "../time-card/time-card";
 import CPSCard from "../cps-card/cps-card";
+import TimeCard from "../time-card/time-card";
 import CodeCard from "../code-card/code-card";
 import Confetti from "react-confetti";
+import { ButtonOutline } from "components/ui/button/button";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface Props {
   cpm: number;
@@ -30,10 +30,9 @@ export default function RaceStatsView({
         Estos son las estadísticas de tu carrera
       </p>
       <div className="flex justify-end mb-5 w-full">
-        <PrimaryButton
-          onClick={() => navigate("/play")}
-          text="Volver a jugar"
-        />
+        <ButtonOutline onClick={() => navigate("/play")}>
+          Volver a jugar
+        </ButtonOutline>
       </div>
       <div className="grid grid-cols-12 gap-5 mb-5 w-full">
         <div className="col-span-2 flex flex-col gap-5">
