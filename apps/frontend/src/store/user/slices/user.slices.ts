@@ -7,10 +7,11 @@ import {
 export interface UserState {
   name: string;
   email?: string;
-  photoURL?: string;
+  image?: string;
   uid?: string;
   accessToken?: string;
   refreshToken?: string;
+  authId: string;
 }
 
 export const userSlice = createSlice({
