@@ -3,7 +3,7 @@ import { lazy, Suspense, ComponentType } from "react";
 
 const Loadable =
   (Component: ComponentType<any>) => (props: { [key: string]: any }) => (
-    <Suspense fallback={<p>awd</p>}>
+    <Suspense fallback={<p>TTTTTTTTTTTTT</p>}>
       <Component {...props} />
     </Suspense>
   );
@@ -26,6 +26,10 @@ const PublicRoutes = {
     {
       path: "/race/:gamemode/:language",
       element: <RaceView />,
+    },
+    {
+      path: "*",
+      element: <p>awdoianwoidwnido</p>,
     },
   ],
 };
