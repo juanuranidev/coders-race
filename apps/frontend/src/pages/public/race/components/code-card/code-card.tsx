@@ -8,10 +8,12 @@ type Props = {
 };
 
 const calculateCodeCardHeight = (code: string): number => {
-  const lineHeight = 24;
-  const padding = 40;
-  const lines = code.split("\n").length;
-  const extraHeight = Math.ceil(code.length / 80) * 10;
+  const padding: number = 40;
+  const lineHeight: number = 24;
+
+  const lines: number = code.split("\n").length;
+  const extraHeight: number = Math.ceil(code.length / 80) * 10;
+
   return lines * lineHeight + padding + extraHeight;
 };
 

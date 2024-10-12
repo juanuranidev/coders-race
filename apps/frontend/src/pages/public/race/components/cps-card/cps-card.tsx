@@ -13,8 +13,8 @@ interface Props {
 
 export default function CPSCard({ cps, text }: Props) {
   return (
-    <div className="bg-black-400 p-5 h-full rounded-lg">
-      <div className="flex flex-row gap-2 items-center">
+    <div className="bg-gray-500 p-4 h-full rounded-lg">
+      <div className="flex flex-row gap-2 items-center mb-2">
         <p className="font-semibold text-white-500 text-lg">{text}</p>
         <TooltipProvider>
           <Tooltip>

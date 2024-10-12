@@ -7,8 +7,8 @@ interface Props {
 
 export default function TimeCard({ milliseconds, text }: Props) {
   return (
-    <div className="bg-black-400 p-5 h-full rounded-lg">
-      <p className="text-white-500 text-lg font-semibold">{text}</p>
+    <div className="bg-gray-500 p-5 h-full rounded-lg">
+      <p className="text-white-500 text-lg font-semibold mb-2">{text}</p>
       <p className="text-white-500 text-lg font-semibold">
         {milliseconds ? `${formatMillisecondsToSeconds(milliseconds)}s` : "0s"}
       </p>
