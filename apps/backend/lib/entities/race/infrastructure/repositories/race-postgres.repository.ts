@@ -3,16 +3,15 @@ import {
   races,
   languages,
   PostgresRace,
-} from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
-import { eq } from "drizzle-orm";
-import { Race } from "@race/domain/entities/race.entity";
-import { Code } from "@code/domain/entities/code.entity";
-import { Client } from "pg";
-import * as schema from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
-import { Language } from "@language/domain/entities/language.entity";
-import { RaceRepository } from "@race/domain/repositories/race.repository";
-import { RaceNotFoundError } from "@race/domain/errors/race-not-found.error";
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+} from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
+import { eq, sql } from 'drizzle-orm';
+import { Race } from '@race/domain/entities/race.entity';
+import { Code } from '@code/domain/entities/code.entity';
+import { Client } from 'pg';
+import * as schema from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
+import { Language } from '@language/domain/entities/language.entity';
+import { RaceRepository } from '@race/domain/repositories/race.repository';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 export class RacePostgresRepository implements RaceRepository {
   private dbClient: NodePgDatabase<typeof schema>;
@@ -30,7 +29,7 @@ export class RacePostgresRepository implements RaceRepository {
     const language = new Language(race?.language?.id!, race?.language?.name!);
     const code = new Code(race?.code?.id!, race?.code?.text!, language);
 
-    return new Race(race.id, race.cpm, race.timeInMS, code, language);
+    return new Race(race.id, Number(race.cps), race.timeInMS, code, language);
   }
 
   async create(race: Race): Promise<void> {
@@ -38,38 +37,47 @@ export class RacePostgresRepository implements RaceRepository {
       .insert(races)
       .values({
         id: race.getId(),
-        cpm: race.getCPM(),
+        cps: sql`${race.getCPS()}::decimal(5,2)`,
         timeInMS: race.getTimeInMS(),
         code: race.getCode().getId(),
         language: race.getLanguage().getId(),
+        userId: race.getUser()?.getId()!,
       })
       .returning();
 
     return;
   }
+
   async readById(raceId: string): Promise<Race | null> {
-    const [race]: PostgresRace[] = await this.dbClient
+    const [raceData] = await this.dbClient
       .select({
         id: races.id,
         code: {
           id: codes.id,
           text: codes.text,
         },
-        cpm: races.cpm,
+        cps: races.cps,
         timeInMS: races.timeInMS,
         language: {
           id: languages.id,
           name: languages.name,
         },
+        createdAt: races.createdAt,
+        userId: races.userId,
       })
       .from(races)
       .where(eq(races.id, raceId))
       .leftJoin(languages, eq(languages.id, races.language))
       .leftJoin(codes, eq(codes.id, races.code));
 
-    if (!race) {
+    if (!raceData) {
       return null;
     }
+
+    const race: PostgresRace = {
+      ...raceData,
+      cps: Number(raceData.cps),
+    };
 
     return this.mapPostgresRaceToEntity(race);
   }

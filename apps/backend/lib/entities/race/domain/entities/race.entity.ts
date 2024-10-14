@@ -1,36 +1,40 @@
-import { Code } from "@code/domain/entities/code.entity";
-import { RaceId } from "@race/domain/values-objects/race-id.value-object";
-import { RaceCPM } from "@race/domain/values-objects/race-cpm.value-object";
-import { Language } from "@language/domain/entities/language.entity";
-import { RaceTimeInMS } from "@race/domain/values-objects/race-time-in-ms.value-object";
+import { Code } from '@code/domain/entities/code.entity';
+import { User } from '@user/domain/entities/user.entity';
+import { RaceId } from '@race/domain/values-objects/race-id.value-object';
+import { RaceCPS } from '../values-objects/race-cps.value-object';
+import { Language } from '@language/domain/entities/language.entity';
+import { RaceTimeInMS } from '@race/domain/values-objects/race-time-in-ms.value-object';
 
 export class Race {
   private id: RaceId;
-  private cpm: RaceCPM;
+  private cps: RaceCPS;
   private timeInMS: RaceTimeInMS;
   private code: Code;
   private language: Language;
+  private user?: User;
 
   constructor(
     id: string,
-    cpm: number,
+    cps: number,
     timeInMS: number,
     code: Code,
-    language: Language
+    language: Language,
+    user?: User | null | undefined
   ) {
     this.id = new RaceId(id);
-    this.cpm = new RaceCPM(cpm);
+    this.cps = new RaceCPS(cps);
     this.timeInMS = new RaceTimeInMS(timeInMS);
     this.code = code;
     this.language = language;
+    this.user = user ?? undefined;
   }
 
   public getId(): string {
     return this.id.value;
   }
 
-  public getCPM(): number {
-    return this.cpm.value;
+  public getCPS(): number {
+    return this.cps.value;
   }
 
   public getTimeInMS(): number {
@@ -44,13 +48,18 @@ export class Race {
     return this.language;
   }
 
+  public getUser(): User | undefined {
+    return this.user;
+  }
+
   public mapToPrimitives() {
     return {
       id: this.id.value,
-      cpm: this.cpm.value,
+      cps: this.cps.value,
       timeInMS: this.timeInMS.value,
       code: this.code.mapToPrimitives(),
       language: this.language.mapToPrimitives(),
+      user: this.user?.mapToPrimitives(),
     };
   }
 }

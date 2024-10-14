@@ -1,6 +1,6 @@
-import { Race } from "@race/domain/entities/race.entity";
-import { RaceRepository } from "@race/domain/repositories/race.repository";
-import { RaceNotFoundError } from "./../../domain/errors/race-not-found.error";
+import { Race } from '@race/domain/entities/race.entity';
+import { RaceRepository } from '@race/domain/repositories/race.repository';
+import { RaceNotFoundError } from './../../domain/errors/race-not-found.error';
 
 export class RaceReadById {
   constructor(private repository: RaceRepository) {}
