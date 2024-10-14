@@ -2,14 +2,14 @@ import {
   codes,
   languages,
   PostgresCode,
-} from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
-import { eq } from "drizzle-orm";
-import { Code } from "@code/domain/entities/code.entity";
-import { Client } from "pg";
-import { Language } from "@language/domain/entities/language.entity";
-import * as schema from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
-import { CodeRepository } from "@code/domain/repositories/code.repository";
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+} from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
+import { eq } from 'drizzle-orm';
+import { Code } from '@code/domain/entities/code.entity';
+import { Client } from 'pg';
+import { Language } from '@language/domain/entities/language.entity';
+import * as schema from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
+import { CodeRepository } from '@code/domain/repositories/code.repository';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 export class CodePostgresRepository implements CodeRepository {
   private dbClient: NodePgDatabase<typeof schema>;
@@ -53,7 +53,7 @@ export class CodePostgresRepository implements CodeRepository {
     return this.mapPostgresCodeToEntity(codeFound);
   }
   async readRandomByLanguage(language: Language): Promise<Code | null> {
-    const allCodes = await this.dbClient
+    const allCodes: PostgresCode[] = await this.dbClient
       .select({
         id: codes.id,
         text: codes.text,
@@ -63,8 +63,8 @@ export class CodePostgresRepository implements CodeRepository {
       .where(eq(codes.language, language.getId()))
       .leftJoin(languages, eq(languages.id, codes.language));
 
-    const randomIndex = Math.floor(Math.random() * allCodes.length);
-    const randomCode = allCodes[randomIndex];
+    const randomIndex: number = Math.floor(Math.random() * allCodes.length);
+    const randomCode: PostgresCode = allCodes[randomIndex];
 
     if (!randomCode) {
       return null;

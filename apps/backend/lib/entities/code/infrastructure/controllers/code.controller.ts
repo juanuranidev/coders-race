@@ -1,18 +1,17 @@
-import { Code } from "@code/domain/entities/code.entity";
-import { Language } from "@language/domain/entities/language.entity";
-import { ServiceContainer } from "@shared/infrastructure/container/service.container";
-import { MissingCodeIdError } from "@code/domain/errors/code-missing-id.errors";
-import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
-import { MissingLanguageNameError } from "@language/domain/errors/language-missing-name.errors";
-import { Response, Request, NextFunction } from "express";
-import { CodeNotFoundError } from "@code/domain/errors/code-not-found";
+import { Code } from '@code/domain/entities/code.entity';
+import { ServiceContainer } from '@shared/infrastructure/container/service.container';
+import { CodeNotFoundError } from '@code/domain/errors/code-not-found';
+import { MissingCodeIdError } from '@code/domain/errors/code-missing-id.errors';
+import { LanguageNotFoundError } from '@language/domain/errors/language-not-found.errors';
+import { MissingLanguageNameError } from '@language/domain/errors/language-missing-name.errors';
+import { Response, Request, NextFunction } from 'express';
 
 export class CodeController {
   async readById(req: Request, res: Response, next: NextFunction) {
     try {
       const { codeId } = req.query;
       if (!codeId) {
-        return res.status(400).json({ error: "Missing codeId parameter" });
+        return res.status(400).json({ error: 'Missing codeId parameter' });
       }
 
       const codeEntity: Code = await ServiceContainer.code.readById.run(
@@ -32,25 +31,20 @@ export class CodeController {
       } else if (error instanceof LanguageNotFoundError) {
         return res.status(404).json({ error: error.message });
       }
-
       next(error);
     }
   }
   async readRandomByLanguage(req: Request, res: Response, next: NextFunction) {
     try {
       const { languageName } = req.query;
-      if (!languageName) {
+      if (!languageName || typeof languageName !== 'string') {
         return res
           .status(400)
-          .json({ error: "missing languageName parameter" });
+          .json({ error: 'missing languageName parameter' });
       }
 
-      const language: Language = await ServiceContainer.language.readByName.run(
-        String(languageName)
-      );
-
       const codeEntity: Code =
-        await ServiceContainer.code.readRandomByLanguageName.run(language);
+        await ServiceContainer.code.readRandomByLanguageName.run(languageName);
 
       res.status(201).json(codeEntity.mapToPrimitives());
     } catch (error) {

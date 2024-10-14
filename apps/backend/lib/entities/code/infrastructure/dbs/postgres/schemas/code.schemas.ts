@@ -1,8 +1,5 @@
-import {
-  languages,
-  PostgresLanguage,
-} from "@language/infrastructure/dbs/postgres/schemas/language.schemas";
-import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import { languages } from "@language/infrastructure/dbs/postgres/schemas/language.schemas";
+import { integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 
 export interface PostgresCode {
   id: number;
@@ -15,7 +12,7 @@ export interface PostgresCode {
 
 export const codes = pgTable("codes", {
   id: serial("id").primaryKey().notNull(),
-  text: varchar("text").notNull(),
+  text: varchar("text", { length: 500 }).notNull(),
   language: integer("language_id")
     .notNull()
     .references(() => languages.id),

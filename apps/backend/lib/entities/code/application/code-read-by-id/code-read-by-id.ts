@@ -1,6 +1,6 @@
-import { Code } from "@code/domain/entities/code.entity";
-import { CodeRepository } from "@code/domain/repositories/code.repository";
-import { CodeNotFoundError } from "@code/domain/errors/code-not-found";
+import { Code } from '@code/domain/entities/code.entity';
+import { CodeRepository } from '@code/domain/repositories/code.repository';
+import { CodeNotFoundError } from '@code/domain/errors/code-not-found';
 
 export class CodeReadById {
   constructor(private repository: CodeRepository) {}
