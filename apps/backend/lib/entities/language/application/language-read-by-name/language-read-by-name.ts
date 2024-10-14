@@ -1,6 +1,6 @@
-import { Language } from "@language/domain/entities/language.entity";
-import { LanguageRepository } from "@language/domain/repositories/language.repository";
-import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
+import { Language } from '@language/domain/entities/language.entity';
+import { LanguageRepository } from '@language/domain/repositories/language.repository';
+import { LanguageNotFoundError } from '@language/domain/errors/language-not-found.errors';
 
 export class LanguageReadByName {
   constructor(private repository: LanguageRepository) {}

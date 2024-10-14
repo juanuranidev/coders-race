@@ -1,13 +1,13 @@
-import { Router } from "express";
-import { LanguageController } from "@language/infrastructure/controllers/language.controller";
+import { Router } from 'express';
+import { LanguageController } from '@language/infrastructure/controllers/language.controller';
 
 export class LanguageRouter {
   static get routes(): Router {
-    const router = Router();
-    const languageController = new LanguageController();
+    const router: Router = Router();
+    const languageController: LanguageController = new LanguageController();
 
-    router.get("/v1/read-all", languageController.readAll);
-    router.get("/v1/read-by-name", languageController.readByName);
+    router.get('/v1/read-all', languageController.readAll);
+    router.get('/v1/read-by-name', languageController.readByName);
 
     return router;
   }

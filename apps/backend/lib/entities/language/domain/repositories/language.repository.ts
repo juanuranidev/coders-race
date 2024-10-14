@@ -1,4 +1,4 @@
-import { Language } from "@language/domain/entities/language.entity";
+import { Language } from '@language/domain/entities/language.entity';
 
 export interface LanguageRepository {
   readAll(): Promise<Language[]>;

@@ -1,5 +1,5 @@
-import { LanguageId } from "@language/domain/values-objects/language-id.value-object";
-import { LanguageName } from "@language/domain/values-objects/language-name.value-object";
+import { LanguageId } from '@language/domain/values-objects/language-id.value-object';
+import { LanguageName } from '@language/domain/values-objects/language-name.value-object';
 
 export class Language {
   private id: LanguageId;

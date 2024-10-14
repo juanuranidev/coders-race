@@ -1,13 +1,13 @@
-import { eq } from "drizzle-orm";
-import { Client } from "pg";
-import * as schema from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
-import { Language } from "@language/domain/entities/language.entity";
-import { LanguageRepository } from "@language/domain/repositories/language.repository";
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import { sql } from 'drizzle-orm';
+import { Client } from 'pg';
+import * as schema from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
+import { Language } from '@language/domain/entities/language.entity';
+import { LanguageRepository } from '@language/domain/repositories/language.repository';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import {
   languages,
   PostgresLanguage,
-} from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
+} from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
 
 export class LanguagePostgresRepository implements LanguageRepository {
   private dbClient: NodePgDatabase<typeof schema>;
@@ -37,7 +37,7 @@ export class LanguagePostgresRepository implements LanguageRepository {
     const [language]: PostgresLanguage[] = await this.dbClient
       .select()
       .from(languages)
-      .where(eq(languages.name, languageName));
+      .where(sql`LOWER(${languages.name}) = LOWER(${languageName})`);
 
     if (!language) {
       return null;
