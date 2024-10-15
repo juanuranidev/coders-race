@@ -1,14 +1,14 @@
 import { User } from '@user/domain/entities/user.entity';
 import { UserRepository } from '@user/domain/repositories/user.repository';
 
-export class UserReadById {
+export class UserReadByAuthId {
   constructor(private repository: UserRepository) { }
 
-  async run(id: string): Promise<User | null> {
-    const user: User | null = await this.repository.readById(id);
+  async run(authId: string): Promise<User | null> {
+    const user: User | null = await this.repository.readByAuthId(authId);
 
     if (!user) {
-      return null
+      return null;
     }
 
     return user;

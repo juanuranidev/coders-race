@@ -1,37 +1,79 @@
-import { ServiceContainer } from "@shared/infrastructure/container/service.container";
-import { Response, Request, NextFunction } from "express";
+import { User } from '@user/domain/entities/user.entity';
+import { UserCreateDto } from '@user/domain/dtos/user-create.dto';
+import { ServiceContainer } from '@shared/infrastructure/container/service.container';
+import { Response, Request, NextFunction } from 'express';
 
 export class UserController {
-  async readByGithubid(req: Request, res: Response, next: NextFunction) {
-    try {
-      const { githubId } = req.params;
-
-      const user = await ServiceContainer.user.readByGithubId.run(githubId);
-
-      res.status(201).json(user);
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  }
-
   async readById(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.params;
+      const { userId } = req.query;
+      if (!userId || typeof userId !== 'string') {
+        return res.status(400).json({ error: 'UserId is required' });
+      }
 
-      const user = await ServiceContainer.user.readById.run(userId);
+      const user: User | null = await ServiceContainer.user.readById.run(userId);
 
-      res.status(201).json(user);
+      res.status(201).json(user?.mapToPrimitives());
     } catch (error) {
       console.log(error);
       next(error);
     }
   }
-  async readAllLeaderboard(req: Request, res: Response, next: NextFunction) {
+  async readProfile(req: Request, res: Response, next: NextFunction) {
     try {
-      const users = await ServiceContainer.user.readAllLeaderboard.run();
+      const { userId } = req.query;
+      if (!userId || typeof userId !== 'string') {
+        return res.status(400).json({ error: 'UserId is required' });
+      }
+      const user: User | null = await ServiceContainer.user.readProfile.run(userId);
 
-      res.status(201).json(users);
+      res.status(201).json(user?.mapToPrimitives());
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+  async readByAuthId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { authId } = req.query;
+      if (!authId || typeof authId !== 'string') {
+        return res.status(400).json({ error: 'AuthId is required' });
+      }
+      const user: User | null = await ServiceContainer.user.readByAuthId.run(authId);
+
+      res.status(201).json(user?.mapToPrimitives());
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+  async readLeaderboard(req: Request, res: Response, next: NextFunction) {
+    try {
+      const users: User[] = await ServiceContainer.user.readLeaderboard.run();
+
+      res.status(201).json(users.map((user) => user.mapToPrimitives()));
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+  async readOrCreate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { user } = req.body;
+      if (!user) {
+        return res.status(400).json({ error: 'User is required' });
+      }
+
+      const [error, userDto] = UserCreateDto.run(user);
+      if (error) {
+        return res.status(400).json({ error });
+      }
+
+      const createdUser: User = await ServiceContainer.user.readOrCreate.run(
+        userDto!
+      );
+
+      res.status(201).json(createdUser.mapToPrimitives());
     } catch (error) {
       console.log(error);
       next(error);

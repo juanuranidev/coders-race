@@ -1,7 +1,9 @@
-import { User } from "@user/domain/entities/user.entity";
+import { User } from '@user/domain/entities/user.entity';
 
 export interface UserRepository {
-  readById(userId: string): Promise<User>;
-  readByGithubId(githubId: string): Promise<User>;
-  readAllUsersLeaderboard(): Promise<User[]>;
+  create(user: User): Promise<User>;
+  readProfile(id: string): Promise<User>;
+  readById(userId: string): Promise<User | null>;
+  readByAuthId(authId: string): Promise<User | null>;
+  readLeaderboard(): Promise<User[]>;
 }

@@ -1,7 +1,7 @@
 import { ValueObject } from '@shared/domain/values-objects/value-object';
 
-export class UserId extends ValueObject<string> {
-  constructor(readonly value: string) {
+export class UserHighestCPS extends ValueObject<number> {
+  constructor(readonly value: number) {
     super(value);
   }
 }
