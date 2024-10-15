@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { useCompleteInput } from "hooks/code/useCompleteInput";
+import { useEffect, useState } from "react";
 import useMillisecondCounter from "hooks/code/useMilisecondsCounter";
 import useCPSCounter from "hooks/code/useCPSCounter";
 import ProgressCard from "./components/progress-card/progress-card";
@@ -15,9 +15,16 @@ import { useCreateRaceMutation } from "services/race/mutations/race.mutations";
 import RaceStatsView from "./components/race-stats-view/race-stats-view";
 import CPSCard from "./components/cps-card/cps-card";
 import { ButtonOutline } from "components/ui/button/button";
+import { useUserReducers } from "hooks/user/useUserReducers";
 
-export default function Race() {
+interface RaceProps {
+  type: string;
+}
+
+export default function Race({ type }: RaceProps) {
   // Handle params and initial information
+  const { user } = useUserReducers();
+
   const { language } = useParams();
   const navigate: NavigateFunction = useNavigate();
 
@@ -25,6 +32,11 @@ export default function Race() {
   // Handle params and initial information
 
   // Handle race information
+  const createRaceMutation = useCreateRaceMutation();
+
+  const [showRaceInformation, setShowRaceInformation] =
+    useState<boolean>(false);
+
   const { milliseconds, startCounter, stopCounter } = useMillisecondCounter();
   const { inputValue, handleCompleteInput } = useCompleteInput({
     code: code?.text ?? "",
@@ -41,19 +53,23 @@ export default function Race() {
     }
     if (inputValue.length === code?.text?.length) {
       stopCounter();
-      handleCreateRace();
+
+      if (type === "compete") {
+        await handleCreateRace();
+      }
+
+      setShowRaceInformation(true);
     }
   };
-
-  const createRaceMutation = useCreateRaceMutation();
 
   const handleCreateRace = async () => {
     const race = {
       codeId: code?.id,
       cps: cps,
       timeInMS: milliseconds,
+      userId: user?.id,
     };
-
+    console.log(race);
     await createRaceMutation.mutateAsync(race);
   };
 
@@ -64,7 +80,7 @@ export default function Race() {
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (createRaceMutation.isSuccess)
+  if (showRaceInformation)
     return (
       <RaceStatsView
         cpm={cps}

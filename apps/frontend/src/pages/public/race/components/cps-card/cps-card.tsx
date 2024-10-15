@@ -1,10 +1,10 @@
-import InfoIcon from "assets/icons/Info.svg";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "components/ui/tooltip";
+} from "components/ui/tooltip/tooltip";
+import Icons from "lib/utils/shared/icons/icons";
 
 interface Props {
   cps: number;
@@ -19,7 +19,7 @@ export default function CPSCard({ cps, text }: Props) {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <img src={InfoIcon} width={25} height={25} alt="info icon" />
+              <Icons.info />
             </TooltipTrigger>
             <TooltipContent>
               <p>

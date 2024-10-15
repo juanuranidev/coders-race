@@ -9,7 +9,7 @@ export default function ProgressCard({ code, inputValue }: Props) {
       <p className="font-semibold text-white-500 text-lg pb-5">Progreso</p>
       <div
         role="progressbar"
-        className="w-full h-2 bg-gray-300 rounded-full overflow-hidden"
+        className="w-full h-2 bg-white-500 rounded-full overflow-hidden"
       >
         <div
           style={{ width: `${(inputValue?.length * 100) / code?.length!}%` }}

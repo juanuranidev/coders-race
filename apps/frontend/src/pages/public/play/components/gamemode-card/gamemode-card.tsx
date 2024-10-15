@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Language } from "lib/interfaces/language/language.interfaces";
 import SelectLanguage from "components/shared/select-language/select-language";
-import { useNavigate, type NavigateFunction } from "react-router-dom";
 import { ButtonPrimary } from "components/ui/button/button";
+import { Card, CardContent, CardHeader } from "components/ui/card/card";
+import { useNavigate, type NavigateFunction } from "react-router-dom";
 
 interface GamemodeCardProps {
+  type: string;
   title: string;
   subtitle: string;
   gamemodeGif: string;
 }
 
 export default function GamemodeCard({
+  type,
   title,
   subtitle,
   gamemodeGif,
@@ -21,40 +24,35 @@ export default function GamemodeCard({
   );
 
   const handleStartRace = () => {
-    const url: string = `/race/${title.toLowerCase()}/${selectedLanguage?.name?.toLowerCase()}`;
-
+    const url: string = `/race/${type}/${selectedLanguage?.name?.toLowerCase()}`;
     navigate(url);
   };
 
   return (
-    <div className="overflow-visible">
-      <div className="relative w-full h-48">
-        <div
-          style={{ backgroundImage: `url(${gamemodeGif})` }}
-          className="absolute inset-0 transition-all duration-500 rounded-t-xl bg-cover bg-center bg-no-repeat w-full h-full bg-black"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
-      </div>
-      <div className="p-4 bg-black-400 flex flex-col justify-between gap-4 rounded-b-xl">
-        <div className="flex items-center gap-5">
-          <h1 className="font-bold text-4xl text-white-500">{title}</h1>
-          <p className="font-medium text-sm text-white-500">{subtitle}</p>
-        </div>
-        <div>
-          <div className="flex items-center gap-2">
-            <SelectLanguage
-              selectedLanguage={selectedLanguage}
-              onLanguageChange={setSelectedLanguage}
-            />
-            <ButtonPrimary
-              onClick={handleStartRace}
-              disabled={!Boolean(selectedLanguage)}
-            >
-              Comenzar
-            </ButtonPrimary>
+    <Card className="overflow-hidden">
+      <CardHeader className="p-2 pb-0">
+        <div className="relative h-48 rounded-lg">
+          <img
+            alt={title}
+            src={gamemodeGif}
+            className="object-cover w-full h-full rounded-lg"
+          />
+          <div className="absolute inset-0 bg-black-500/50 rounded-lg" />
+          <div className="absolute inset-0 p-4 flex flex-col justify-end">
+            <h3 className="text-2xl font-bold text-white mb2">{title}</h3>
+            <p className="text-sm font-medium text-white-500">{subtitle}</p>
           </div>
         </div>
-      </div>
-    </div>
+      </CardHeader>
+      <CardContent className="p-4 px-2 flex flex-row items-center justify-between gap-4">
+        <SelectLanguage
+          selectedLanguage={selectedLanguage}
+          onLanguageChange={setSelectedLanguage}
+        />
+        <ButtonPrimary onClick={handleStartRace} disabled={!selectedLanguage}>
+          Comenzar
+        </ButtonPrimary>
+      </CardContent>
+    </Card>
   );
 }
