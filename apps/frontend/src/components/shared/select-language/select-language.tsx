@@ -1,77 +1,73 @@
+import * as React from "react";
+import Loader from "components/ui/loader/loader";
+import { Language } from "lib/interfaces/language/language.interfaces";
 import { useState } from "react";
-import PythonIcon from "assets/icons/Python.svg";
-import JavaScriptIcon from "assets/icons/JavaScript.svg";
-import TypeScriptIcon from "assets/icons/TypeScript.svg";
-import Confetti from "components/ui/confetti/confetti";
+import CustomConfetti from "components/ui/custom-confetti/custom-confetti";
+import { getLanguageIcon } from "lib/utils/language/language.utils";
+import { useLanguageReadAll } from "services/language/queries/language.queries";
 
-interface Language {
-  value: string;
-  label: string;
-  icon: string;
-}
-
-const languages: Language[] = [
-  { value: "typescript", label: "TypeScript", icon: TypeScriptIcon },
-  { value: "javascript", label: "JavaScript", icon: JavaScriptIcon },
-  { value: "python", label: "Python", icon: PythonIcon },
-];
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "components/ui/select/select";
+import { Small } from "components/ui/typography/typography";
 
 type Props = {
   selectedLanguage: Language | null;
-  onLanguageChange: (language: Language) => void;
+  onLanguageChange: React.Dispatch<React.SetStateAction<Language | null>>;
 };
 
 export default function SelectLanguage({
   selectedLanguage,
   onLanguageChange,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [triggerConfetti, setTriggerConfetti] = useState(false);
+  const { data, isLoading } = useLanguageReadAll();
+  const [triggerConfetti, setTriggerConfetti] = useState<boolean>(false);
+
+  const handleSelectLanguage = (id: string) => {
+    const selectedLanguage = data!.find((lang: Language) => lang.id === id);
+
+    if (selectedLanguage) {
+      onLanguageChange(selectedLanguage);
+    }
+
+    setTriggerConfetti(true);
+    setTimeout(() => setTriggerConfetti(false), 100);
+  };
+
+  if (isLoading || !data?.length) return <Loader />;
 
   return (
-    <div className="relative flex-grow">
-      <button
-        type="button"
-        className="bg-background-gray border border-gray-300 text-white-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {selectedLanguage ? (
-          <>
-            <img
-              src={selectedLanguage.icon}
-              alt={selectedLanguage.label}
-              className="w-5 h-5 inline-block mr-2"
-            />
-            {selectedLanguage.label}
-          </>
-        ) : (
-          "Choose a language"
-        )}
-      </button>
-      <Confetti icon={selectedLanguage?.icon || ""} trigger={triggerConfetti} />
-      {isOpen && (
-        <div className="absolute z-50 w-full bg-background-gray border border-gray-300 mt-1 rounded-lg shadow-lg top-full left-0">
-          {languages.map((lang) => (
-            <button
-              key={lang.value}
-              className="flex items-center w-full px-4 py-2 text-left text-white-400 hover:bg-gray-700"
-              onClick={() => {
-                onLanguageChange(lang);
-                setIsOpen(false);
-                setTriggerConfetti(true);
-                setTimeout(() => setTriggerConfetti(false), 100);
-              }}
-            >
-              <img
-                src={lang.icon}
-                alt={lang.label}
-                className="w-5 h-5 mr-2 text-white-400"
-              />
-              {lang.label}
-            </button>
-          ))}
-        </div>
-      )}
+    <div className="relative w-full">
+      <Select onValueChange={(value: string) => handleSelectLanguage(value)}>
+        <CustomConfetti
+          trigger={triggerConfetti}
+          icon={getLanguageIcon(selectedLanguage)}
+        />
+        <SelectTrigger>
+          <SelectValue placeholder="Selecciona un lenguaje" />
+        </SelectTrigger>
+        <SelectContent>
+          {data
+            ? data.map((language: Language) => (
+                <SelectItem key={language.id} value={language.id}>
+                  <div className="flex flex-row items-center">
+                    <img
+                      loading="lazy"
+                      alt={language.name}
+                      src={getLanguageIcon(language)}
+                      className="w-5 h-5 mr-2 text-white-400"
+                    />
+                    <Small>{language?.name}</Small>
+                  </div>
+                </SelectItem>
+              ))
+            : null}
+        </SelectContent>
+      </Select>
     </div>
   );
 }
