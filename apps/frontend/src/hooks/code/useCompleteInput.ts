@@ -31,11 +31,19 @@ export function useCompleteInput({
   };
 
   const handleAutoCompleteInput = (): void => {
+    const hasCompletedInput: boolean = inputValue.length === code.length;
+
+    if (hasCompletedInput) {
+      setInputValue("");
+      return;
+    }
+
     const canCompleteInput: boolean = inputValue.length < code.length;
 
     if (canCompleteInput) {
       const nextChar = code[inputValue.length];
       setInputValue((prevValue) => prevValue + nextChar);
+      return;
     }
   };
 

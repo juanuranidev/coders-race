@@ -6,14 +6,18 @@ interface UseCPSCounterProps {
   codeText: string;
 }
 
+interface UseCPSCounterReturn {
+  cps: number;
+}
+
 const useCPSCounter = ({
   milliseconds,
   inputValue,
   codeText,
-}: UseCPSCounterProps) => {
+}: UseCPSCounterProps): UseCPSCounterReturn => {
   const [cps, setCps] = useState<number>(0.0);
+
   const handleCalculateCps = (): void => {
-    // console.log(cps);
     if (codeText.length === inputValue.length) {
       return;
     }
@@ -22,7 +26,6 @@ const useCPSCounter = ({
       setCps(0.0);
       return;
     }
-    console.log(milliseconds);
 
     const charactersTyped: number = inputValue.length;
     const timeInSeconds: number = milliseconds / 1000;
