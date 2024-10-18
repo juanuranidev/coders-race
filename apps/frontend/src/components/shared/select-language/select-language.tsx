@@ -47,7 +47,7 @@ export default function SelectLanguage({
           trigger={triggerConfetti}
           icon={getLanguageIcon(selectedLanguage)}
         />
-        <SelectTrigger>
+        <SelectTrigger className="font-medium text-white-500">
           <SelectValue placeholder="Selecciona un lenguaje" />
         </SelectTrigger>
         <SelectContent>
@@ -61,7 +61,9 @@ export default function SelectLanguage({
                       src={getLanguageIcon(language)}
                       className="w-5 h-5 mr-2 text-white-400"
                     />
-                    <Small>{language?.name}</Small>
+                    <Small className="text-white-500 font-medium">
+                      {language?.name}
+                    </Small>
                   </div>
                 </SelectItem>
               ))
