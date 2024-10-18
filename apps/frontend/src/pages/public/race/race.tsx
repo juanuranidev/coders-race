@@ -16,6 +16,7 @@ import RaceStatsView from "./components/race-stats-view/race-stats-view";
 import CPSCard from "./components/cps-card/cps-card";
 import { ButtonOutline } from "components/ui/button/button";
 import { useUserReducers } from "hooks/user/useUserReducers";
+import FullScreenLoader from "components/ui/full-screen-loader/full-screen-loader";
 
 interface RaceProps {
   type: string;
@@ -64,10 +65,10 @@ export default function Race({ type }: RaceProps) {
 
   const handleCreateRace = async () => {
     const race = {
-      codeId: code?.id,
       cps: cps,
+      userId: user?.id!,
       timeInMS: milliseconds,
-      userId: user?.id,
+      codeId: Number(code?.id),
     };
     console.log(race);
     await createRaceMutation.mutateAsync(race);
@@ -78,7 +79,8 @@ export default function Race({ type }: RaceProps) {
   }, [inputValue]);
   // Handle race information
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || createRaceMutation.isPending || !code)
+    return <FullScreenLoader />;
 
   if (showRaceInformation)
     return (
