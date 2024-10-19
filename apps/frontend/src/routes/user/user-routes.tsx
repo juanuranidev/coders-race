@@ -9,15 +9,26 @@ const Loadable =
     </Suspense>
   );
 
+const RaceView = Loadable(lazy(() => import("pages/public/race/race")));
 const ProfileView = Loadable(lazy(() => import("pages/user/profile/profile")));
-
+const NotFoundView = Loadable(
+  lazy(() => import("pages/public/not-found/not-found"))
+);
 const UserRoutes = {
   element: <PublicLayout />,
   children: [
     ...PublicRoutes.children,
     {
+      path: "/race/compete/:language",
+      element: <RaceView type="compete" />,
+    },
+    {
       path: "/profile",
       element: <ProfileView />,
+    },
+    {
+      path: "*",
+      element: <NotFoundView />,
     },
   ],
 };
