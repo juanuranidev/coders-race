@@ -1,6 +1,6 @@
 import {
-  keepPreviousData,
   useQuery,
+  keepPreviousData,
   type UseQueryResult,
 } from "@tanstack/react-query";
 import { readRandomByLanguageApi } from "../api/code.api";

@@ -2,17 +2,17 @@ import axios, { AxiosResponse, AxiosRequestConfig, Method } from "axios";
 import ENV from "lib/env";
 
 type RequestProps<T = any> = {
-  method: Method;
-  url: string;
-  params?: Record<string, any>;
   data?: T;
+  url: string;
+  method: Method;
+  params?: Record<string, any>;
 };
 
 const request = async <ResponseType = any, RequestData = any>({
-  method,
   url,
-  params,
   data,
+  method,
+  params,
 }: RequestProps<RequestData>): Promise<AxiosResponse<ResponseType>> => {
   const config: AxiosRequestConfig = {
     url,

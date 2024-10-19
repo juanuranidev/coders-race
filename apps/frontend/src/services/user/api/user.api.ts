@@ -21,7 +21,31 @@ export const readOrCreateUserApi = async (user: {
 export const readUserByAuthIdApi = async (authId: string | undefined) => {
   const response = await request({
     method: "GET",
-    url: `/user/v1/read-by-auth-id/${authId}`,
+    url: "/user/v1/read-by-auth-id",
+    params: {
+      authId,
+    },
+  });
+
+  return response.data;
+};
+
+export const readUserProfileApi = async (userId: string | undefined) => {
+  const response = await request({
+    method: "GET",
+    url: "/user/v1/read-profile",
+    params: {
+      userId,
+    },
+  });
+
+  return response.data;
+};
+
+export const readUserLeaderboardApi = async () => {
+  const response = await request({
+    method: "GET",
+    url: "/user/v1/read-leaderboard",
   });
 
   return response.data;

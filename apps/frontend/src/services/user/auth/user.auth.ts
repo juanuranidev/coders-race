@@ -5,10 +5,12 @@ import {
   GithubAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { User } from "lib/interfaces/user/user.interfaces";
 import {
   readOrCreateUserApi,
   readUserByAuthIdApi,
 } from "services/user/api/user.api";
+import axios from "axios";
 
 export const signInWithGitHubPopupAuth = async (): Promise<UserCredential> => {
   const user: UserCredential = await signInWithPopup(
@@ -34,10 +36,14 @@ export const completeLoginFlow = async (): Promise<any> => {
     throw new Error("Failed to create user in the API");
   }
 
+  axios.defaults.headers.common["Authorization"] = `Bearer ${apiUser.authId}`;
+
+  console.log(axios.defaults.headers.common["Authorization"]);
+
   return apiUser;
 };
 
-export const readUserInSession = async (): Promise<any> => {
+export const readUserInSession = async (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(getAuth(), async (user) => {
       try {
