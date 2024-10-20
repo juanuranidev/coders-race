@@ -1,11 +1,13 @@
 export interface User {
-  id: string;
+  id?: string;
   name: string;
   image: string;
-  authId: string;
-  githubId: string;
+  authId?: string;
+  githubId?: string;
   averageCPS?: number;
   topLanguage?: string;
-  githubUsername: string;
+  githubUsername?: string;
   racesCompleted?: number;
+  rankingPosition?: number;
+  totalTimeInRaces?: number;
 }

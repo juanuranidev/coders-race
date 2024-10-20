@@ -3,6 +3,7 @@ import {
   User,
   Info,
   Clock,
+  Trophy,
   LogOut,
   Github,
   ChartSpline,
@@ -38,6 +39,9 @@ const Icons = {
   ),
   info: ({ color = "#F0F0F0", className, ...props }: IconProps) => (
     <Info className={className} color={color} {...props} />
+  ),
+  trophy: ({ color = "#F0F0F0", className, ...props }: IconProps) => (
+    <Trophy className={className} color={color} {...props} />
   ),
 };
 
