@@ -3,7 +3,12 @@ import { createRaceApi } from "../api/race.api";
 
 export function useCreateRaceMutation() {
   return useMutation({
-    mutationFn: (data: any) => createRaceApi(data),
+    mutationFn: (data: {
+      cps: number;
+      codeId: number;
+      userId: string;
+      timeInMS: number;
+    }) => createRaceApi(data),
     onSuccess: () => {
       console.log("first");
     },
