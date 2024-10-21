@@ -16,7 +16,7 @@ export default function Character({ character, index, input }: Props) {
   const characterClass = classNames("text-white-500", "text-xl", "inline", {
     "opacity-50": !isCompleted,
     "opacity-100": isCompleted,
-    "bg-blue-500 ": isExpected,
+    "bg-violet-500 ": isExpected,
   });
 
   return (
