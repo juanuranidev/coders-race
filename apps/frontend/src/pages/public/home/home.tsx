@@ -26,8 +26,8 @@ export default function Home() {
           <h1 className="text-7xl mb-4 font-bold text-6xl text-white-500 bg-clip-text text-transparent">
             Coders Race
           </h1>
-          <p className="text-white-400 text-lg font-semibold mb-8">
-            ¿Qué tan rápido puedes codear?
+          <p className="text-white-500 text-lg font-semibold mb-8">
+            ¿Qué tan rápido puedes programar?
           </p>
           <ButtonPrimary onClick={() => navigate("/play")}>Jugar</ButtonPrimary>
         </div>

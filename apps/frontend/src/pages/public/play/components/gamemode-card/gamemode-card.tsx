@@ -38,13 +38,13 @@ export default function GamemodeCard({
             className="object-cover w-full h-full rounded-lg"
           />
           <div className="absolute inset-0 bg-black-500/80 rounded-lg" />
-          <div className="absolute inset-0 pb-4 flex flex-col justify-end">
-            <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
+          <div className="absolute inset-0 flex flex-col justify-end">
+            <h3 className="text-2xl font-bold text-white">{title}</h3>
             <p className="text-sm font-medium text-white-600">{subtitle}</p>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="pt-2 flex flex-row items-center justify-between gap-4">
+      <CardContent className="pt-4 flex flex-row items-center justify-between gap-4">
         <SelectLanguage
           selectedLanguage={selectedLanguage}
           onLanguageChange={setSelectedLanguage}

@@ -1,6 +1,6 @@
 import Icons from "lib/utils/shared/icons/icons";
 import Loader from "components/ui/loader/loader";
-import { H3 } from "components/ui/typography/typography";
+import { H3, P } from "components/ui/typography/typography";
 import { Link } from "react-router-dom";
 import StatCard from "./components/stat-card/stat-card";
 import { Separator } from "components/ui/separator/separator";
@@ -21,27 +21,24 @@ export default function profile() {
   if (!userProfile) return <Loader />;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row items-start gap-5 mb-5">
-        <Avatar className="w-20 h-20">
+    <div className="">
+      <div className="mb-4 bg-black-500 py-2 rounded-xl flex items-center gap-4">
+        <Avatar className="w-16 h-16">
           <AvatarImage src={user?.image} alt={user?.name} />
           <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
         </Avatar>
-        <div className="flex-grow">
-          <h1 className="text-white-500 text-3xl font-bold mb-2">
-            {user?.name}
-          </h1>
-          <Link
-            target="_blank"
-            rel="noopener noreferrer"
-            to={`https://github.com/${userProfile?.githubUsername}`}
-            className="inline-flex items-center gap-2"
-          >
-            <Icons.github className="w-4 h-4" />
-            <span className="text-white-500 font-medium underline">
-              {userProfile?.githubUsername}
-            </span>
-          </Link>
+        <div>
+          <H3 className="flex items-center gap-2">{user?.name}</H3>
+          <P className="text-white-600 font-medium font-medium underline ml-1">
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              to={`https://github.com/${userProfile?.githubUsername}`}
+              className="inline-flex items-center gap-2"
+            >
+              <span className="">{userProfile?.githubUsername}</span>
+            </Link>
+          </P>
         </div>
       </div>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

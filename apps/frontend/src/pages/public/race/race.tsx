@@ -17,6 +17,7 @@ import CPSCard from "./components/cps-card/cps-card";
 import { ButtonOutline } from "components/ui/button/button";
 import { useUserReducers } from "hooks/user/useUserReducers";
 import FullScreenLoader from "components/ui/full-screen-loader/full-screen-loader";
+import { H3, P } from "components/ui/typography/typography";
 
 interface RaceProps {
   type: string;
@@ -94,7 +95,13 @@ export default function Race({ type }: RaceProps) {
 
   return (
     <div>
-      <div className="flex justify-end mb-5">
+      <div className="mb-4 bg-black-500 py-2 rounded-xl flex justify-between items-center">
+        <div>
+          <H3>¡Escribe el código!</H3>
+          <P className="text-white-600 font-medium">
+            Comienza a escribir, no presiones el mouse
+          </P>
+        </div>
         <ButtonOutline onClick={() => navigate("/play")}>Volver</ButtonOutline>
       </div>
       <div className="grid grid-cols-12 gap-x-5 mb-5">

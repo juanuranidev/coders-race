@@ -5,9 +5,9 @@ export default function Play() {
   return (
     <div>
       <div className="mb-4 bg-black-500 py-2 rounded-xl">
-        <H3 className="mb-2">Elige tu modo de juego</H3>
+        <H3>Elige tu modo de juego</H3>
         <P className="text-white-600 font-medium">
-          Practica tus habilidades o compite contra otros jugadores.
+          Practica tus habilidades o compite contra otros jugadores
         </P>
       </div>
       <div className="flex flex-wrap justify-start gap-8">

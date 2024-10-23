@@ -23,7 +23,9 @@ export const getLanguageIconByName = (name: string | undefined): string => {
     return "";
   }
 
-  const language = LANGUAGES_CONSTANTS.LIST.find((language) => language.name === name);
+  const language = LANGUAGES_CONSTANTS.LIST.find(
+    (language) => language.name === name
+  );
 
   return language?.image || "";
 };
