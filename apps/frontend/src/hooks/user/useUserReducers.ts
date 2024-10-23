@@ -11,7 +11,6 @@ interface UserReducersReturn {
   getUser: () => UserState | null;
 }
 
-
 export function useUserReducers(): UserReducersReturn {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
