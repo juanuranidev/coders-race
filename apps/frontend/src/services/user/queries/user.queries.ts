@@ -3,7 +3,11 @@ import {
   keepPreviousData,
   type UseQueryResult,
 } from "@tanstack/react-query";
-import { readUserByAuthIdApi, readUserLeaderboardApi, readUserProfileApi } from "../api/user.api";
+import {
+  readUserByAuthIdApi,
+  readUserLeaderboardApi,
+  readUserProfileApi,
+} from "../api/user.api";
 
 export function useUserReadByAuthId(
   authId: string | undefined
