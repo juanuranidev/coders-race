@@ -1,5 +1,5 @@
-import { ValueObject } from '@shared/domain/values-objects/value-object';
-import { CodeTextTooLongError } from '@code/domain/errors/code-text-too-long.error';
+import { ValueObject } from "@shared/domain/values-objects/value-object";
+import { CodeTextTooLongError } from "@code/domain/errors/code-text-too-long.error";
 
 export class CodeText extends ValueObject<string> {
   constructor(readonly value: string) {

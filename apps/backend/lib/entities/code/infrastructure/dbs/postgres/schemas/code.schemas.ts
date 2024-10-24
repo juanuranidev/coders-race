@@ -1,5 +1,5 @@
 import { languages } from "@language/infrastructure/dbs/postgres/schemas/language.schemas";
-import { integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 
 export interface PostgresCode {
   id: number;

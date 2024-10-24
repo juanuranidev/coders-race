@@ -1,6 +1,6 @@
-import { CodeId } from '@code/domain/values-objects/code-id.value-object';
-import { CodeText } from '@code/domain/values-objects/code-text.value-object';
-import { Language } from '@language/domain/entities/language.entity';
+import { CodeId } from "@code/domain/values-objects/code-id.value-object";
+import { CodeText } from "@code/domain/values-objects/code-text.value-object";
+import { Language } from "@language/domain/entities/language.entity";
 
 export class Code {
   id: CodeId;

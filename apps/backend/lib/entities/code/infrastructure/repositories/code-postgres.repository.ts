@@ -2,14 +2,14 @@ import {
   codes,
   languages,
   PostgresCode,
-} from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
-import { eq } from 'drizzle-orm';
-import { Code } from '@code/domain/entities/code.entity';
-import { Client } from 'pg';
-import { Language } from '@language/domain/entities/language.entity';
-import * as schema from '@shared/infrastructure/dbs/postgres/schemas/postgres.schemas';
-import { CodeRepository } from '@code/domain/repositories/code.repository';
-import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
+} from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
+import { eq } from "drizzle-orm";
+import { Code } from "@code/domain/entities/code.entity";
+import { Client } from "pg";
+import { Language } from "@language/domain/entities/language.entity";
+import * as schema from "@shared/infrastructure/dbs/postgres/schemas/postgres.schemas";
+import { CodeRepository } from "@code/domain/repositories/code.repository";
+import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
 
 export class CodePostgresRepository implements CodeRepository {
   private dbClient: NodePgDatabase<typeof schema>;

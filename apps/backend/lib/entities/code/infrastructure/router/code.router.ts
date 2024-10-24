@@ -1,16 +1,16 @@
-import { Router } from 'express';
-import { CodeController } from '@code/infrastructure/controllers/code.controller';
-import { AuthMiddleware } from '@shared/infrastructure/middlewares/auth.middleware';
+import { Router } from "express";
+import { CodeController } from "@code/infrastructure/controllers/code.controller";
+import { ErrorHandlerMiddleware } from "@shared/infrastructure/middlewares/error-handler.middleware";
 
 export class CodeRouter {
   static get routes(): Router {
-    const router = Router();
-    const codeController = new CodeController();
+    const router: Router = Router();
+    const codeController: CodeController = new CodeController();
 
-    router.get('/v1/read-by-id', codeController.readById);
     router.get(
-      '/v1/read-random-by-language',
-      codeController.readRandomByLanguage
+      "/v1/read-random-by-language",
+      codeController.readRandomByLanguage,
+      ErrorHandlerMiddleware.run
     );
     return router;
   }

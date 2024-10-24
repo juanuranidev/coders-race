@@ -1,6 +1,6 @@
-export class MissingCodeIdError extends Error {
+export class CodeMissingIdError extends Error {
   constructor() {
-    super('Code id is required');
-    this.name = 'MissingCodeIdError';
+    super("Code id is required");
+    this.name = "CodeMissingIdError";
   }
 }
