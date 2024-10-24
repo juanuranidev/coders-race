@@ -1,6 +1,6 @@
-import { ServerRouter } from '@server/infrastructure/router/server.router';
-import { Server } from '@server/infrastructure/server';
-import ENVS from '@shared/infrastructure/config/envs/envs';
+import { ServerRouter } from "@server/infrastructure/router/server.router";
+import { Server } from "@server/infrastructure/server";
+import ENVS from "@shared/infrastructure/config/envs/envs";
 
 (async () => {
   main();

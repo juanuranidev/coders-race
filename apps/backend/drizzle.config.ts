@@ -1,4 +1,4 @@
-import ENVS from "@shared/infrastructure/config/envs/envs";
+import ENVS from "./lib/shared/infrastructure/config/envs/envs";
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({

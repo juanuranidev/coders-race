@@ -9,8 +9,8 @@
     "start": "npm run build && node dist/app.js",
     "db:migrations:generate": "drizzle-kit generate",
     "db:migrations:push": "ts-node ./lib/shared/infrastructure/dbs/postgres/migrate/postgres.migrate.ts",
-    "lint": "eslint --fix . --ext .ts",
-    "prepare": "husky"
+    "db:seed": "ts-node ./lib/shared/infrastructure/dbs/postgres/seed/server-postgres.seed.ts",
+    "lint": "eslint --fix . --ext .ts"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@auth/express": "^0.6.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
