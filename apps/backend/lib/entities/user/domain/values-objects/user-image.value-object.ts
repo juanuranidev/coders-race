@@ -1,5 +1,5 @@
-import { ValueObject } from '@shared/domain/values-objects/value-object';
-import { UserImageTooLongError } from '@user/domain/errors/user-image-too-long.errors';
+import { ValueObject } from "@shared/domain/values-objects/value-object";
+import { UserImageTooLongError } from "@user/domain/errors/user-image-too-long.errors";
 
 export class UserImage extends ValueObject<string> {
   constructor(readonly value: string) {

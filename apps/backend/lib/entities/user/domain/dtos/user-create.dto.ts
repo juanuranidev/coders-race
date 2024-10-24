@@ -10,12 +10,12 @@ export class UserCreateDto {
   static run(data: { [key: string]: any }): [string?, UserCreateDto?] {
     const { name, image, githubUsername, githubId, authId } = data;
 
-    if (!name) return ['name parameter is required', undefined];
-    if (!image) return ['image parameter is required', undefined];
-    if (!authId) return ['authId parameter is required', undefined];
-    if (!githubId) return ['githubId parameter is required', undefined];
+    if (!name) return ["name parameter is required", undefined];
+    if (!image) return ["image parameter is required", undefined];
+    if (!authId) return ["authId parameter is required", undefined];
+    if (!githubId) return ["githubId parameter is required", undefined];
     if (!githubUsername)
-      return ['githubUsername parameter is required', undefined];
+      return ["githubUsername parameter is required", undefined];
 
     return [
       undefined,

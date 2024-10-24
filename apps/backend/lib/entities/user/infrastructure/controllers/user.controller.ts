@@ -1,45 +1,29 @@
-import { User } from '@user/domain/entities/user.entity';
-import { UserCreateDto } from '@user/domain/dtos/user-create.dto';
-import { ServiceContainer } from '@shared/infrastructure/container/service.container';
-import { Response, Request, NextFunction } from 'express';
+import { User } from "@user/domain/entities/user.entity";
+import { UserCreateDto } from "@user/domain/dtos/user-create.dto";
+import { ServiceContainer } from "@shared/infrastructure/container/service.container";
+import { Response, Request, NextFunction } from "express";
 
 export class UserController {
-  async readById(req: Request, res: Response, next: NextFunction) {
-    try {
-      const { userId } = req.query;
-      if (!userId || typeof userId !== 'string') {
-        return res.status(400).json({ error: 'UserId is required' });
-      }
-
-      const user: User | null = await ServiceContainer.user.readById.run(userId);
-
-      res.status(201).json(user?.mapToPrimitives());
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  }
   async readProfile(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.query;
-      if (!userId || typeof userId !== 'string') {
-        return res.status(400).json({ error: 'UserId is required' });
-      }
-      const user: User | null = await ServiceContainer.user.readProfile.run(userId);
+      const user: User = req.body.user;
 
-      res.status(201).json(user?.mapToPrimitives());
+      const userEntity: User | null =
+        await ServiceContainer.user.readProfile.run(user.getId());
+
+      res.status(201).json(userEntity?.mapToPrimitives());
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
   async readByAuthId(req: Request, res: Response, next: NextFunction) {
     try {
       const { authId } = req.query;
-      if (!authId || typeof authId !== 'string') {
-        return res.status(400).json({ error: 'AuthId is required' });
+      if (!authId || typeof authId !== "string") {
+        return res.status(400).json({ error: "AuthId is required" });
       }
-      const user: User | null = await ServiceContainer.user.readByAuthId.run(authId);
+      const user: User | null =
+        await ServiceContainer.user.readByAuthId.run(authId);
 
       res.status(201).json(user?.mapToPrimitives());
     } catch (error) {
@@ -61,7 +45,7 @@ export class UserController {
     try {
       const { user } = req.body;
       if (!user) {
-        return res.status(400).json({ error: 'User is required' });
+        return res.status(400).json({ error: "User is required" });
       }
 
       const [error, userDto] = UserCreateDto.run(user);

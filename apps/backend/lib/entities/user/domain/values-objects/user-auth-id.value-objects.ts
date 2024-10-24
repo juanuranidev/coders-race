@@ -1,5 +1,5 @@
-import { ValueObject } from '@shared/domain/values-objects/value-object';
-import { UserAuthIdTooLongError } from '../errors/user-auth-id-too-long.errors';
+import { ValueObject } from "@shared/domain/values-objects/value-object";
+import { UserAuthIdTooLongError } from "../errors/user-auth-id-too-long.errors";
 
 export class UserAuthId extends ValueObject<string> {
   constructor(readonly value: string) {

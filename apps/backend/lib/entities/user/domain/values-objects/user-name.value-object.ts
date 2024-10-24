@@ -1,5 +1,5 @@
-import { ValueObject } from '@shared/domain/values-objects/value-object';
-import { UserNameTooLongError } from '@user/domain/errors/user-name-too-long.errors';
+import { ValueObject } from "@shared/domain/values-objects/value-object";
+import { UserNameTooLongError } from "@user/domain/errors/user-name-too-long.errors";
 
 export class UserName extends ValueObject<string> {
   constructor(readonly value: string) {

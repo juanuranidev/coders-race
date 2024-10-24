@@ -1,14 +1,15 @@
-import { UserId } from '@user/domain/values-objects/user-id.value-object';
-import { UserName } from '@user/domain/values-objects/user-name.value-object';
-import { UserImage } from '@user/domain/values-objects/user-image.value-object';
-import { UserAuthId } from '../values-objects/user-auth-id.value-objects';
-import { UserGithubId } from '@user/domain/values-objects/user-github-id.value-object';
-import { UserAverageCPS } from '../values-objects/user-average-cps.value-objects';
-import { UserHighestCPS } from '@user/domain/values-objects/user-total-time-in-races.value-objects';
-import { UserTopLanguage } from '../values-objects/user-top-language.value-objects';
-import { UserGithubUsername } from '@user/domain/values-objects/user-github-username.value-object';
-import { UserRacesCompleted } from '@user/domain/values-objects/user-races-completed.value-objects';
-import { UserTotalTimeInRaces } from '@user/domain/values-objects/user-highest-cps.value-objects';
+import { UserId } from "@user/domain/values-objects/user-id.value-object";
+import { UserName } from "@user/domain/values-objects/user-name.value-object";
+import { UserImage } from "@user/domain/values-objects/user-image.value-object";
+import { UserAuthId } from "../values-objects/user-auth-id.value-objects";
+import { UserGithubId } from "@user/domain/values-objects/user-github-id.value-object";
+import { UserAverageCPS } from "../values-objects/user-average-cps.value-objects";
+import { UserHighestCPS } from "@user/domain/values-objects/user-total-time-in-races.value-objects";
+import { UserTopLanguage } from "../values-objects/user-top-language.value-objects";
+import { UserGithubUsername } from "@user/domain/values-objects/user-github-username.value-object";
+import { UserRacesCompleted } from "@user/domain/values-objects/user-races-completed.value-objects";
+import { UserRankingPosition } from "../values-objects/user-ranking-position.value-objects copy";
+import { UserTotalTimeInRaces } from "@user/domain/values-objects/user-highest-cps.value-objects";
 
 export class User {
   private id: UserId;
@@ -22,6 +23,7 @@ export class User {
   private highestCPS?: UserHighestCPS;
   private topLanguage?: UserTopLanguage;
   private averageCPS?: UserAverageCPS;
+  private rankingPosition?: UserRankingPosition;
 
   constructor(
     id: string,
@@ -33,7 +35,8 @@ export class User {
     racesCompleted?: number,
     totalTimeInRaces?: number,
     highestCPS?: number,
-    averageCPS?: number
+    averageCPS?: number,
+    rankingPosition?: number
   ) {
     this.id = new UserId(id);
     this.name = new UserName(name);
@@ -55,10 +58,17 @@ export class User {
     if (averageCPS) {
       this.averageCPS = new UserAverageCPS(averageCPS);
     }
+    if (rankingPosition) {
+      this.rankingPosition = new UserRankingPosition(rankingPosition);
+    }
   }
 
   public getId(): string {
     return this.id.value;
+  }
+
+  public setId(value: string): void {
+    this.id = new UserId(value);
   }
 
   public getName(): string {
@@ -83,6 +93,10 @@ export class User {
 
   public getAuthId(): string {
     return this.authId.value;
+  }
+
+  public setAuthId(value: string): void {
+    this.authId = new UserAuthId(value);
   }
 
   public getRacesCompleted(): number | null {
@@ -125,6 +139,14 @@ export class User {
     this.averageCPS = new UserAverageCPS(value);
   }
 
+  public getRankingPosition(): number | null {
+    return this?.rankingPosition?.value ?? null;
+  }
+
+  public setRankingPosition(value: number): void {
+    this.rankingPosition = new UserRankingPosition(value);
+  }
+
   public mapToPrimitives() {
     return {
       id: this.id.value,
@@ -138,6 +160,7 @@ export class User {
       highestCPS: this?.highestCPS?.value ?? null,
       topLanguage: this.topLanguage?.value ?? null,
       averageCPS: this?.averageCPS?.value ?? null,
+      rankingPosition: this?.rankingPosition?.value ?? null,
     };
   }
 }

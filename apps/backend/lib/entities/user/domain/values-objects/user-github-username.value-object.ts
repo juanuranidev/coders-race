@@ -1,5 +1,5 @@
-import { ValueObject } from '@shared/domain/values-objects/value-object';
-import { UserGithubUsernameTooLongError } from '@user/domain/errors/user-github-username-too-long.errors';
+import { ValueObject } from "@shared/domain/values-objects/value-object";
+import { UserGithubUsernameTooLongError } from "@user/domain/errors/user-github-username-too-long.errors";
 
 export class UserGithubUsername extends ValueObject<string> {
   constructor(readonly value: string) {
