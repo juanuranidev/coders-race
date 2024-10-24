@@ -1,6 +1,6 @@
-export class MissingRaceIdError extends Error {
+export class RaceMissingIdError extends Error {
   constructor() {
-    super('Race id is required');
-    this.name = 'MissingRaceIdError';
+    super("Race id is required");
+    this.name = "RaceMissingIdError";
   }
 }

@@ -1,9 +1,9 @@
-import { Code } from '@code/domain/entities/code.entity';
-import { User } from '@user/domain/entities/user.entity';
-import { RaceId } from '@race/domain/values-objects/race-id.value-object';
-import { RaceCPS } from '../values-objects/race-cps.value-object';
-import { Language } from '@language/domain/entities/language.entity';
-import { RaceTimeInMS } from '@race/domain/values-objects/race-time-in-ms.value-object';
+import { Code } from "@code/domain/entities/code.entity";
+import { User } from "@user/domain/entities/user.entity";
+import { RaceId } from "@race/domain/values-objects/race-id.value-object";
+import { RaceCPS } from "../values-objects/race-cps.value-object";
+import { Language } from "@language/domain/entities/language.entity";
+import { RaceTimeInMS } from "@race/domain/values-objects/race-time-in-ms.value-object";
 
 export class Race {
   private id: RaceId;
@@ -11,6 +11,7 @@ export class Race {
   private timeInMS: RaceTimeInMS;
   private code: Code;
   private language: Language;
+  private createdAt: Date;
   private user?: User;
 
   constructor(
@@ -19,6 +20,7 @@ export class Race {
     timeInMS: number,
     code: Code,
     language: Language,
+    createdAt: Date,
     user?: User | null | undefined
   ) {
     this.id = new RaceId(id);
@@ -26,6 +28,7 @@ export class Race {
     this.timeInMS = new RaceTimeInMS(timeInMS);
     this.code = code;
     this.language = language;
+    this.createdAt = createdAt;
     this.user = user ?? undefined;
   }
 
@@ -59,6 +62,7 @@ export class Race {
       timeInMS: this.timeInMS.value,
       code: this.code.mapToPrimitives(),
       language: this.language.mapToPrimitives(),
+      createdAt: this.createdAt,
       user: this.user?.mapToPrimitives(),
     };
   }
