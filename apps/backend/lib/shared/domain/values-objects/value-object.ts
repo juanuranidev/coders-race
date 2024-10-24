@@ -10,6 +10,7 @@ export abstract class ValueObject<T extends Primitives> {
   constructor(value: T) {
     this.value = value;
     this.ensureValueIsDefined(value);
+    this.ensureValueIsTheSameAsParams(value);
   }
 
   equals(other: ValueObject<T>): boolean {
@@ -26,6 +27,12 @@ export abstract class ValueObject<T extends Primitives> {
   private ensureValueIsDefined(value: Optional<T>): void {
     if (value === null || value === undefined) {
       throw new InvalidArgumentError("Value must be defined");
+    }
+  }
+
+  private ensureValueIsTheSameAsParams(value: T): void {
+    if (value !== value) {
+      throw new InvalidArgumentError("Value must be the same as the parameter");
     }
   }
 }
