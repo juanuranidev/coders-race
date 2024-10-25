@@ -1,13 +1,13 @@
+import { User } from "lib/interfaces/user/user.interfaces";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { UserState } from "../slices/user.slices";
 
 export const setUser = (
-  _state: UserState | null,
-  action: PayloadAction<UserState | null>
+  _state: User | null,
+  action: PayloadAction<User | null>
 ) => {
   return action.payload;
 };
 
-export const getUser = (state: UserState | null) => {
+export const getUser = (state: User | null) => {
   return state;
 };
