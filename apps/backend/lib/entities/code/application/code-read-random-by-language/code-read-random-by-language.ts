@@ -8,11 +8,12 @@ export class CodeReadRandomByLanguage {
   constructor(
     private codeRepository: CodeRepository,
     private languageReadByName: LanguageReadByName
-  ) { }
+  ) {}
 
   async run(languageName: string): Promise<Code> {
     const language: Language = await this.languageReadByName.run(languageName);
-    const code: Code | null = await this.codeRepository.readRandomByLanguage(language);
+    const code: Code | null =
+      await this.codeRepository.readRandomByLanguage(language);
     if (!code) {
       throw new CodeNotFoundError();
     }

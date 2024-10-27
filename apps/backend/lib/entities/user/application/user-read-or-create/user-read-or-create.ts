@@ -9,10 +9,12 @@ export class UserReadOrCreate {
     private repository: UserRepository,
     private uuidAdapter: UuidAdapter,
     private userReadByAuthId: UserReadByAuthId
-  ) { }
+  ) {}
 
   async run(userDto: UserCreateDto): Promise<User> {
-    const userFound: User | null = await this.userReadByAuthId.run(userDto.authId);
+    const userFound: User | null = await this.userReadByAuthId.run(
+      userDto.authId
+    );
     if (userFound) {
       return userFound;
     }

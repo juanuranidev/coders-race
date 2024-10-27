@@ -52,9 +52,7 @@
         "users_id_unique": {
           "name": "users_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       }
     },
@@ -87,12 +85,8 @@
           "name": "codes_language_id_languages_id_fk",
           "tableFrom": "codes",
           "tableTo": "languages",
-          "columnsFrom": [
-            "language_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["language_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -177,12 +171,8 @@
           "name": "races_code_id_codes_id_fk",
           "tableFrom": "races",
           "tableTo": "codes",
-          "columnsFrom": [
-            "code_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["code_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -190,12 +180,8 @@
           "name": "races_language_id_languages_id_fk",
           "tableFrom": "races",
           "tableTo": "languages",
-          "columnsFrom": [
-            "language_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["language_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -203,12 +189,8 @@
           "name": "races_user_id_users_id_fk",
           "tableFrom": "races",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

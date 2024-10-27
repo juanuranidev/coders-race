@@ -7,7 +7,7 @@ import { UserReadById } from "@user/application/user-read-by-id/user-read-by-id"
 import { CodeRepository } from "@code/domain/repositories/code.repository";
 import { RaceRepository } from "@race/domain/repositories/race.repository";
 import { CodeNotFoundError } from "@code/domain/errors/code-not-found";
-import { UserNotFoundError } from "@user/domain/errors/user.errors";
+import { UserNotFoundError } from "@user/domain/errors/user-not-found.errors";
 import { LanguageReadByName } from "@language/application/language-read-by-name/language-read-by-name";
 import { LanguageNotFoundError } from "@language/domain/errors/language-not-found.errors";
 
@@ -18,7 +18,7 @@ export class RaceCreate {
     private languageReadByName: LanguageReadByName,
     private codeRepository: CodeRepository,
     private userReadById: UserReadById
-  ) { }
+  ) {}
 
   async run(
     cps: number,
@@ -31,12 +31,12 @@ export class RaceCreate {
       throw new CodeNotFoundError();
     }
 
-    const languageEntity: Language | null =
-      await this.languageReadByName.run(codeEntity!.getLanguage().getName());
+    const languageEntity: Language | null = await this.languageReadByName.run(
+      codeEntity!.getLanguage().getName()
+    );
     if (!languageEntity) {
       throw new LanguageNotFoundError();
     }
-
 
     const userEntity: User | null = await this.userReadById.run(userId);
     if (!userEntity) {

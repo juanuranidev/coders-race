@@ -1,7 +1,6 @@
 import ENVS from "../config/envs/envs";
 import { RaceCreate } from "@race/application/race-create/race-create";
 import { UuidAdapter } from "@shared/infrastructure/adapters/uuid.adapter";
-import { RaceReadById } from "@race/application/race-read-by-id/race-read-by-id";
 import { UserReadById } from "@user/application/user-read-by-id/user-read-by-id";
 import { UserReadProfile } from "@user/application/user-read-profile/user-read-profile";
 import { LanguageReadAll } from "@language/application/language-read-all/language-read-all";
@@ -46,7 +45,6 @@ export const ServiceContainer = {
       codeRepositoryPostgres,
       new UserReadById(userRepositoryPostgres)
     ),
-    readById: new RaceReadById(raceRepositoryPostgres),
     readByUserId: new RaceReadByUserId(raceRepositoryPostgres),
   },
   user: {

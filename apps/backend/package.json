@@ -10,7 +10,7 @@
     "db:migrations:generate": "drizzle-kit generate",
     "db:migrations:push": "ts-node ./lib/shared/infrastructure/dbs/postgres/migrate/postgres.migrate.ts",
     "db:seed": "ts-node ./lib/shared/infrastructure/dbs/postgres/seed/server-postgres.seed.ts",
-    "lint": "eslint --fix . --ext .ts"
+    "lint": "eslint --fix . --c .ts"
   },
   "author": "",
   "license": "ISC",

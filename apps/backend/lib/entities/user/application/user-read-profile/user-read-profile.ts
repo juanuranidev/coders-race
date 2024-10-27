@@ -7,7 +7,7 @@ export class UserReadProfile {
   constructor(
     private repository: UserRepository,
     private userReadById: UserReadById
-  ) { }
+  ) {}
 
   async run(userId: string): Promise<User> {
     const userEntity: User | null = await this.userReadById.run(userId);

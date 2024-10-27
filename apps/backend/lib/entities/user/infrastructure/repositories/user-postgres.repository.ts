@@ -53,7 +53,7 @@ export class UserPostgresRepository implements UserRepository {
       .where(eq(users.id, userId));
 
     if (!userFound) {
-      return null
+      return null;
     }
 
     return this.mapPostgresUserToEntity(userFound);

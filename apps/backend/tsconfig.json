@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "ES2022",
     "module": "commonjs",
-    "baseUrl": "./",
     "outDir": "dist/",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
