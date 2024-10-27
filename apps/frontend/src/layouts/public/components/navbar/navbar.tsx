@@ -43,7 +43,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="container px-0 py-10 flex flex-row items-center h-[5rem]">
+    <div className="container px-4 py-10 flex flex-row items-center h-[5rem]">
       <div
         className="flex justify-between"
         style={{ minWidth: "100%", width: "100%" }}

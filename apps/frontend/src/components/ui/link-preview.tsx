@@ -8,7 +8,6 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { Link } from "react-router-dom";
 import { cn } from "lib/utils/shared/shared.utils";
 type LinkPreviewProps = {
   children: React.ReactNode;
@@ -29,8 +28,6 @@ export const LinkPreview = ({
   className,
   width = 200,
   height = 125,
-  quality = 50,
-  layout = "fixed",
   isStatic = false,
   imageSrc = "",
 }: LinkPreviewProps) => {

@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import ENV from "lib/env";
+import ENV from "lib/utils/shared/envs/env";
 
 export const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,

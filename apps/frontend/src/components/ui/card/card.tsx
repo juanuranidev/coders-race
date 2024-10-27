@@ -1,19 +1,25 @@
 import * as React from "react";
 import { cn } from "lib/utils/shared/shared.utils";
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg text-white-500 shadow-sm bg-black-500 z-100 border-[2px] border-white-400 p-0",
-      className
-    )}
-    {...props}
-  />
-));
+// Add a new interface to include the disabled prop
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  disabled?: boolean;
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, disabled, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "rounded-lg text-white-500 shadow-sm bg-black-500 z-1000 border-[2px] border-white-400 p-0",
+        disabled && "opacity-50 cursor-not-allowed",
+        className
+      )}
+      aria-disabled={disabled}
+      {...props}
+    />
+  )
+);
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<

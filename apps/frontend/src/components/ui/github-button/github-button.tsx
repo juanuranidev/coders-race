@@ -3,7 +3,7 @@ import CircularLoader from "components/ui/circular-loader/circular-loader";
 
 interface GitHubButtonProps {
   text: string;
-  onClick: () => any;
+  onClick: () => void;
   disabled?: boolean;
   isLoading?: boolean;
 }

@@ -1,4 +1,3 @@
-import * as React from "react";
 import Loader from "components/ui/loader/loader";
 import { Language } from "lib/interfaces/language/language.interfaces";
 import { useState } from "react";
@@ -15,15 +14,17 @@ import {
 } from "components/ui/select/select";
 import { Small } from "components/ui/typography/typography";
 
-type Props = {
+interface SelectLanguageProps {
   selectedLanguage: Language | null;
-  onLanguageChange: React.Dispatch<React.SetStateAction<Language | null>>;
-};
+  onLanguageChange: (language: Language | null) => void;
+  disabled?: boolean;
+}
 
 export default function SelectLanguage({
   selectedLanguage,
   onLanguageChange,
-}: Props) {
+  disabled,
+}: SelectLanguageProps) {
   const { data, isLoading } = useLanguageReadAll();
   const [triggerConfetti, setTriggerConfetti] = useState<boolean>(false);
 
@@ -42,7 +43,10 @@ export default function SelectLanguage({
 
   return (
     <div className="relative w-full">
-      <Select onValueChange={(value: string) => handleSelectLanguage(value)}>
+      <Select
+        onValueChange={(value: string) => handleSelectLanguage(value)}
+        disabled={disabled}
+      >
         <CustomConfetti
           trigger={triggerConfetti}
           icon={getLanguageIcon(selectedLanguage)}
