@@ -26,10 +26,10 @@ export class RacePostgresRepository implements RaceRepository {
   }
   private mapPostgresRaceToEntity(race: PostgresRace): Race {
     const language: Language = new Language(
-      race?.language?.id!,
-      race?.language?.name!
+      race.language!.id!,
+      race.language!.name!
     );
-    const code: Code = new Code(race?.code?.id!, race?.code?.text!, language);
+    const code: Code = new Code(race.code!.id!, race.code!.text!, language);
 
     return new Race(
       race.id,
@@ -49,7 +49,7 @@ export class RacePostgresRepository implements RaceRepository {
         timeInMS: race.getTimeInMS(),
         code: race.getCode().getId(),
         language: race.getLanguage().getId(),
-        userId: race.getUser()?.getId()!,
+        userId: race.getUser()!.getId()!,
       })
       .returning();
 

@@ -10,6 +10,6 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   rules: {
     eqeqeq: "error",
-    // "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-explicit-any": "off",
   },
 };

@@ -25,8 +25,8 @@ export class CodePostgresRepository implements CodeRepository {
 
   private mapPostgresCodeToEntity(code: PostgresCode): Code {
     const languageEntity: Language = new Language(
-      code?.language?.id!,
-      code?.language?.name!
+      code.language!.id!,
+      code.language!.name!
     );
 
     return new Code(code.id, code.text, languageEntity);
