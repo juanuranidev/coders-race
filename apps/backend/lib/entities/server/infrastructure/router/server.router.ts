@@ -15,7 +15,6 @@ export class ServerRouter {
     router.use("/api/user", UserRouter.routes);
     router.use(ErrorHandlerMiddleware.run);
 
-
     return router;
   }
 }
