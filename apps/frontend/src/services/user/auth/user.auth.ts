@@ -21,15 +21,20 @@ export const signInWithGitHubPopupAuth = async (): Promise<UserCredential> => {
   return user;
 };
 
-export const completeLoginFlow = async (): Promise<any> => {
-  const firebaseUser: UserCredential = await signInWithGitHubPopupAuth();
+export const completeLoginFlow = async (): Promise<User> => {
+  const firebaseUser: any = await signInWithGitHubPopupAuth();
+  console.log(firebaseUser);
+
+  if (!firebaseUser?.user) {
+    throw new Error("Failed to get GitHub username");
+  }
 
   const userData = {
-    name: firebaseUser.user.displayName ?? "",
-    image: firebaseUser.user.photoURL ?? "",
     authId: firebaseUser.user.uid,
-    githubId: firebaseUser.user.providerData[0].uid ?? "",
-    githubUsername: firebaseUser.user.displayName ?? "",
+    githubId: firebaseUser.user.providerData[0].uid,
+    image: firebaseUser.user.providerData[0].photoURL,
+    name: firebaseUser.user.providerData[0].displayName,
+    githubUsername: firebaseUser.user.reloadUserInfo.screenName,
   };
   const apiUser = await readOrCreateUserApi(userData);
   if (!apiUser) {

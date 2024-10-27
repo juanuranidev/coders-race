@@ -9,6 +9,7 @@ interface GamemodeCardProps {
   type: string;
   title: string;
   subtitle: string;
+  disabled?: boolean;
   gamemodeGif: string;
 }
 
@@ -16,6 +17,7 @@ export default function GamemodeCard({
   type,
   title,
   subtitle,
+  disabled,
   gamemodeGif,
 }: GamemodeCardProps) {
   const navigate: NavigateFunction = useNavigate();
@@ -24,12 +26,13 @@ export default function GamemodeCard({
   );
 
   const handleStartRace = () => {
+    if (disabled) return;
     const url: string = `/race/${type}/${selectedLanguage?.name?.toLowerCase()}`;
     navigate(url);
   };
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden" disabled={disabled}>
       <CardHeader className="pb-0">
         <div className="relative h-48 rounded-lg">
           <img
@@ -48,8 +51,12 @@ export default function GamemodeCard({
         <SelectLanguage
           selectedLanguage={selectedLanguage}
           onLanguageChange={setSelectedLanguage}
+          disabled={disabled}
         />
-        <ButtonPrimary onClick={handleStartRace} disabled={!selectedLanguage}>
+        <ButtonPrimary
+          onClick={handleStartRace}
+          disabled={disabled || !selectedLanguage}
+        >
           Comenzar
         </ButtonPrimary>
       </CardContent>

@@ -14,7 +14,7 @@ import {
   AvatarFallback,
 } from "components/ui/avatar/avatar";
 
-export default function profile() {
+export default function Profile() {
   const { user } = useUserReducers();
   const { data: userProfile } = useUserReadProfile(user?.id);
 
@@ -41,21 +41,21 @@ export default function profile() {
           </P>
         </div>
       </div>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 grid-cols-3">
         <StatCard
           title="Carreras Completadas"
-          value={userProfile?.racesCompleted}
+          value={userProfile?.racesCompleted ?? 0}
           icon={<Icons.chartSpline className="w-6 h-6" />}
         />
         <StatCard
           title="CPS más alto"
-          value={userProfile?.highestCPS}
+          value={userProfile?.highestCPS ?? 0}
           icon={<Icons.star className="w-6 h-6" />}
         />
         <StatCard
           title="Tiempo total"
           icon={<Icons.clock className="w-6 h-6" />}
-          value={`${formatMillisecondsToSeconds(userProfile?.totalTimeInRaces)}s`}
+          value={`${formatMillisecondsToSeconds(userProfile?.totalTimeInRaces ?? 0)}s`}
         />
       </div>
       <Separator className="my-8" />

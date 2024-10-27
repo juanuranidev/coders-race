@@ -8,10 +8,11 @@ import {
   readUserLeaderboardApi,
   readUserProfileApi,
 } from "../api/user.api";
+import { User } from "lib/interfaces/user/user.interfaces";
 
 export function useUserReadByAuthId(
   authId: string | undefined
-): UseQueryResult<any> {
+): UseQueryResult<User> {
   return useQuery({
     queryKey: ["user-read-by-auth-id", authId],
     queryFn: () => readUserByAuthIdApi(authId),
@@ -23,7 +24,7 @@ export function useUserReadByAuthId(
 
 export function useUserReadProfile(
   userId: string | undefined
-): UseQueryResult<any> {
+): UseQueryResult<User> {
   return useQuery({
     queryKey: ["user-read-profile", userId],
     queryFn: () => readUserProfileApi(userId),
@@ -33,7 +34,7 @@ export function useUserReadProfile(
   });
 }
 
-export function useUserReadLeaderboard(): UseQueryResult<any> {
+export function useUserReadLeaderboard(): UseQueryResult<User[]> {
   return useQuery({
     queryKey: ["user-read-leaderboard"],
     queryFn: readUserLeaderboardApi,

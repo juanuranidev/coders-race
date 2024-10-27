@@ -20,10 +20,10 @@ export default function Home() {
   }, [handleAutoCompleteInput]);
 
   return (
-    <div className="container mx-auto px-0 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+    <div className="container mx-auto px-4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
       <div className="flex justify-between items-center">
         <div className="flex flex-col items-start">
-          <h1 className="text-7xl mb-4 font-bold text-6xl text-white-500 bg-clip-text text-transparent">
+          <h1 className="mb-4 font-bold text-6xl text-white-500 bg-clip-text text-transparent sm:text-4xl md:text-5xl lg:text-7xl">
             Coders Race
           </h1>
           <p className="text-white-500 text-lg font-semibold mb-8">

@@ -57,10 +57,10 @@ export default function Leaderboard() {
               <TableHead>Usuario</TableHead>
               <TableHead className="text-center">CPS Promedio</TableHead>
               <TableHead className="text-center">
-                Carreras Completadas
+                Tiempo Total en Carreras
               </TableHead>
               <TableHead className="text-center">
-                Tiempo Total en Carreras
+                Carreras Completadas
               </TableHead>
               <TableHead className="text-center">Lenguaje Favorito</TableHead>
             </TableRow>
@@ -99,12 +99,12 @@ export default function Leaderboard() {
                   <P>{user.averageCPS}</P>
                 </TableCell>
                 <TableCell className="text-center">
-                  <P>{user.racesCompleted}</P>
-                </TableCell>
-                <TableCell className="text-center">
                   <P>
                     {formatMillisecondsToSeconds(user.totalTimeInRaces ?? 0)}s
                   </P>
+                </TableCell>
+                <TableCell className="text-center">
+                  <P>{user.racesCompleted}</P>
                 </TableCell>
                 <TableCell className="text-center">
                   <div className="flex items-center justify-center gap-2">

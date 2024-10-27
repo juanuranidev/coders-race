@@ -67,11 +67,11 @@ export default function Race({ type }: RaceProps) {
   const handleCreateRace = async () => {
     const race = {
       cps: cps,
-      userId: user?.id!,
+      userId: user.id,
       timeInMS: milliseconds,
       codeId: Number(code?.id),
     };
-    console.log(race);
+
     await createRaceMutation.mutateAsync(race);
   };
 

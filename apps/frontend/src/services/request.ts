@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig, Method } from "axios";
-import ENV from "lib/env";
+import ENV from "lib/utils/shared/envs/env";
 
 type RequestProps<T = any> = {
   data?: T;

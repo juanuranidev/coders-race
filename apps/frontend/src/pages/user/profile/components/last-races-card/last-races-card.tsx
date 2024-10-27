@@ -23,21 +23,21 @@ export default function LastRacesCard() {
         <TableHeader>
           <TableRow>
             <TableHead>Fecha</TableHead>
-            <TableHead>Tiempo</TableHead>
-            <TableHead>CPS</TableHead>
-            <TableHead>Lenguaje</TableHead>
+            <TableHead className="text-center">CPS</TableHead>
+            <TableHead className="text-center">Tiempo (s)</TableHead>
+            <TableHead className="text-center">Lenguaje</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {races?.map((race: Race) => (
             <TableRow key={race.id}>
               <TableCell>{formatDate(race.createdAt)}</TableCell>
-              <TableCell>
+              <TableCell className="text-center">{race.cps}</TableCell>
+              <TableCell className="text-center">
                 {formatMillisecondsToSeconds(race.timeInMS)}s
               </TableCell>
-              <TableCell>{race.cps}</TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
+              <TableCell className="text-center">
+                <div className="flex items-center justify-center gap-2">
                   <img
                     className="h-5 w-5"
                     alt={race.language.name}

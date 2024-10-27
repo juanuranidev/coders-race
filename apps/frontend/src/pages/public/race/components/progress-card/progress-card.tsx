@@ -22,7 +22,9 @@ export default function ProgressCard({ code, inputValue }: Props) {
           className="w-full h-2 bg-white-500 rounded-full overflow-hidden"
         >
           <div
-            style={{ width: `${(inputValue?.length * 100) / code?.length!}%` }}
+            style={{
+              width: `${(inputValue?.length * 100) / (code?.length ?? 0)}%`,
+            }}
             className="h-2 bg-purple-500 rounded-xl transition-all duration-300 ease-in-out"
           />
         </div>

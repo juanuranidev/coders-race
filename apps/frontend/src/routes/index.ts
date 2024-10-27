@@ -6,9 +6,7 @@ import { useUserReducers } from "hooks/user/useUserReducers";
 export default function Routes() {
   const { user } = useUserReducers();
 
-  if (user) {
-    return useRoutes([UserRoutes]);
-  }
+  const routes = user ? [UserRoutes] : [PublicRoutes];
 
-  return useRoutes([PublicRoutes]);
+  return useRoutes(routes);
 }
