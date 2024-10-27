@@ -19,7 +19,7 @@ export default function Profile() {
   const { data: userProfile } = useUserReadProfile(user?.id);
 
   if (!userProfile) return <Loader />;
-  d;
+
   return (
     <div className="">
       <div className="mb-4 bg-black-500 py-2 rounded-xl flex items-center gap-4">
