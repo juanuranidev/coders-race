@@ -4,6 +4,7 @@ export interface User {
   image: string;
   authId?: string;
   githubId?: string;
+  highestCPS?: number;
   averageCPS?: number;
   topLanguage?: string;
   githubUsername?: string;

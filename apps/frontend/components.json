@@ -4,15 +4,15 @@
   "rsc": false,
   "tsx": true,
   "tailwind": {
-    "config": "./src/tailwind.config.ts",
-    "css": "./src/index.css",
+    "config": "./tailwind.config.ts",
+    "css": "./src/styles/global.css",
     "baseColor": "slate",
     "cssVariables": false,
     "prefix": ""
   },
   "aliases": {
     "components": "components",
-    "utils": "lib/utils",
+    "utils": "lib/shared",
     "ui": "components/ui",
     "examples": "components/examples",
     "blocks": "components/blocks"
