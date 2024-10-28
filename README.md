@@ -235,7 +235,6 @@ Para instalar y correr el proyecto de forma local sigue los siguientes pasos
 Antes de realizar la instalación, asegúrate de tener las siguientes herramientas configuradas:
 
 - [Node.js](https://nodejs.org/) (version 18 o mayor)
-- [Backend Entrenaly](https://github.com/juanuranidev/entrenaly-backend)
 - [Aplicación de Firebase para autenticación](https://firebase.google.com/)
 
 ### Pasos de instalación
@@ -258,7 +257,7 @@ Antes de realizar la instalación, asegúrate de tener las siguientes herramient
    code .
    ```
 
-4. Crea un archivo .env basado en el archivo .env.example y agrega tus variables de entorno:
+4. Crea un archivo .env en backend y frontend dentro de la carpeta apps y en la carpeta principal basado en los archivos .env.example para agregar tus variables de entorno, las variables genéricas ya se encuentran definidas:
 
 > [!NOTE]  
 > La variable de entorno BUILD_COMMAND sirve para definir si queremos levantar nuestra aplicación en modo desarrollo o producción. Para el modo desarrollo deberemos asignar el valor "dev" mientras que para el modo producción deberemos asignarle el valor de "start".
