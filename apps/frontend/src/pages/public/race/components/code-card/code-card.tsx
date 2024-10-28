@@ -28,6 +28,12 @@ export default function CodeCard({ code, inputValue, onInput }: Props) {
     onInput(syntheticEvent);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+    }
+  };
+
   useEffect(() => {
     setCodeCardHeight(calculateCodeCardHeight(code));
   }, [code]);
@@ -46,6 +52,7 @@ export default function CodeCard({ code, inputValue, onInput }: Props) {
         autoFocus
         value={inputValue}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         className="absolute top-0 left-0 w-full opacity-0 cursor-text resize-none"
         style={{
           height: `${codeCardHeight}px`,
