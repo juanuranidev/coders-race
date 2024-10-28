@@ -4,7 +4,7 @@ import GamemodeCard from "pages/public/play/components/gamemode-card/gamemode-ca
 
 export default function Play() {
   const { user } = useUserReducers();
-  console.log(user);
+
   return (
     <div>
       <div className="mb-4 bg-black-500 py-2 rounded-xl">

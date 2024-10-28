@@ -23,7 +23,6 @@ export const signInWithGitHubPopupAuth = async (): Promise<UserCredential> => {
 
 export const completeLoginFlow = async (): Promise<User> => {
   const firebaseUser: any = await signInWithGitHubPopupAuth();
-  console.log(firebaseUser);
 
   if (!firebaseUser?.user) {
     throw new Error("Failed to get GitHub username");
@@ -42,8 +41,6 @@ export const completeLoginFlow = async (): Promise<User> => {
   }
 
   axios.defaults.headers.common["Authorization"] = `Bearer ${apiUser.authId}`;
-
-  console.log(axios.defaults.headers.common["Authorization"]);
 
   return apiUser;
 };

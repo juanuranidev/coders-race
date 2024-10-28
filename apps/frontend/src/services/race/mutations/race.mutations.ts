@@ -9,8 +9,5 @@ export function useCreateRaceMutation() {
       userId: string;
       timeInMS: number;
     }) => createRaceApi(data),
-    onSuccess: () => {
-      console.log("first");
-    },
   });
 }

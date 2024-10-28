@@ -12,7 +12,7 @@ export class AuthMiddleware {
     }
 
     const token = authHeader.split(" ")[1];
-    console.log(token);
+
     try {
       const user = await ServiceContainer.user.readByAuthId.run(token);
 
