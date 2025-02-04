@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cn } from "lib/utils/shared/shared.utils";
 
-// Add a new interface to include the disabled prop
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
